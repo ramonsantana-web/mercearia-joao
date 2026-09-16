@@ -817,3 +817,639 @@
   renderProducts();
 
 })();
+
+/* ================================================================
+   PÁGINA DE VENDAS
+   Visualização, filtros e confirmação de pagamento
+   ================================================================ */
+
+   (function () {
+    "use strict";
+  
+    const salesTableBody =
+      document.querySelector(
+        "#sales-table-body"
+      );
+  
+    /*
+     * Se a tabela não existir, não estamos no vendas.html.
+     */
+    if (!salesTableBody) {
+      return;
+    }
+  
+    const saleRows = Array.from(
+      document.querySelectorAll(".sale-row")
+    );
+  
+    const viewButtons = Array.from(
+      document.querySelectorAll(
+        ".view-sale-button"
+      )
+    );
+  
+    const filterButtons = Array.from(
+      document.querySelectorAll(
+        ".sale-filter-button"
+      )
+    );
+  
+    const searchInput =
+      document.querySelector(
+        "#sales-search-input"
+      );
+  
+    const emptySalesRow =
+      document.querySelector(
+        "#empty-sales-row"
+      );
+  
+    const resultsCount =
+      document.querySelector(
+        "#sales-results-count"
+      );
+  
+    const totalValueElement =
+      document.querySelector(
+        "#sales-total-value"
+      );
+  
+    const paidValueElement =
+      document.querySelector(
+        "#sales-paid-value"
+      );
+  
+    const pendingValueElement =
+      document.querySelector(
+        "#sales-pending-value"
+      );
+  
+    const paidCountElement =
+      document.querySelector(
+        "#sales-paid-count"
+      );
+  
+    const pendingCountElement =
+      document.querySelector(
+        "#sales-pending-count"
+      );
+  
+    const newSaleButton =
+      document.querySelector(
+        "#new-sale-button"
+      );
+  
+    const salesStorageKey =
+      "mercearia-paid-sales";
+  
+    let selectedSaleFilter = "all";
+  
+  
+    /* ================================================================
+       PÁGINA DE VENDAS — FUNÇÕES AUXILIARES
+       ================================================================ */
+  
+    function normalizeSaleText(text) {
+      return String(text)
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(
+          /[\u0300-\u036f]/g,
+          ""
+        )
+        .trim();
+    }
+  
+    function formatCurrency(value) {
+      return new Intl.NumberFormat(
+        "pt-BR",
+        {
+          style: "currency",
+          currency: "BRL"
+        }
+      ).format(value);
+    }
+  
+    function formatPaymentDate() {
+      return new Intl.DateTimeFormat(
+        "pt-BR",
+        {
+          day: "2-digit",
+          month: "short",
+          year: "numeric"
+        }
+      )
+        .format(new Date())
+        .replace(".", "");
+    }
+  
+  
+    /* ================================================================
+       PÁGINA DE VENDAS — SALVAMENTO DOS PAGAMENTOS
+       ================================================================ */
+  
+    function getSavedPaidSales() {
+      try {
+        const savedSales =
+          localStorage.getItem(
+            salesStorageKey
+          );
+  
+        return savedSales
+          ? JSON.parse(savedSales)
+          : [];
+      } catch (error) {
+        return [];
+      }
+    }
+  
+    function savePaidSale(saleId) {
+      const savedSales =
+        getSavedPaidSales();
+  
+      if (!savedSales.includes(saleId)) {
+        savedSales.push(saleId);
+      }
+  
+      try {
+        localStorage.setItem(
+          salesStorageKey,
+          JSON.stringify(savedSales)
+        );
+      } catch (error) {
+        console.warn(
+          "Não foi possível salvar o pagamento."
+        );
+      }
+    }
+  
+  
+    /* ================================================================
+       PÁGINA DE VENDAS — ATUALIZAÇÃO VISUAL DO PAGAMENTO
+       ================================================================ */
+  
+    function markRowAsPaid(
+      saleRow,
+      savePayment
+    ) {
+      const saleId =
+        saleRow.dataset.saleId;
+  
+      const customerName =
+        saleRow.dataset.customer;
+  
+      saleRow.dataset.status = "paid";
+  
+      const paymentDate =
+        saleRow.querySelector(
+          ".sale-payment-date"
+        );
+  
+      const statusElement =
+        saleRow.querySelector(
+          ".sale-status"
+        );
+  
+      const paidButton =
+        saleRow.querySelector(
+          ".mark-paid-button"
+        );
+  
+      if (paymentDate) {
+        paymentDate.textContent =
+          formatPaymentDate();
+      }
+  
+      if (statusElement) {
+        statusElement.classList.remove(
+          "is-pending"
+        );
+  
+        statusElement.classList.add(
+          "is-paid"
+        );
+  
+        statusElement.innerHTML =
+          '<i aria-hidden="true"></i>Pago';
+      }
+  
+      if (paidButton) {
+        paidButton.remove();
+      }
+  
+      if (savePayment) {
+        savePaidSale(saleId);
+  
+        /*
+         * Confirmação visual para leitor de tela.
+         */
+        const message =
+          "Pagamento de " +
+          customerName +
+          " confirmado.";
+  
+        const liveMessage =
+          document.createElement("span");
+  
+        liveMessage.className =
+          "visually-hidden";
+  
+        liveMessage.setAttribute(
+          "role",
+          "status"
+        );
+  
+        liveMessage.textContent =
+          message;
+  
+        document.body.appendChild(
+          liveMessage
+        );
+  
+        window.setTimeout(
+          function () {
+            liveMessage.remove();
+          },
+          2000
+        );
+      }
+    }
+  
+    function restoreSavedPayments() {
+      const savedSales =
+        getSavedPaidSales();
+  
+      saleRows.forEach(
+        function (saleRow) {
+          if (
+            savedSales.includes(
+              saleRow.dataset.saleId
+            )
+          ) {
+            markRowAsPaid(
+              saleRow,
+              false
+            );
+          }
+        }
+      );
+    }
+  
+  
+    /* ================================================================
+       PÁGINA DE VENDAS — INDICADORES
+       ================================================================ */
+  
+    function updateSalesSummary() {
+      let totalValue = 0;
+      let paidValue = 0;
+      let pendingValue = 0;
+  
+      let paidCount = 0;
+      let pendingCount = 0;
+  
+      saleRows.forEach(
+        function (saleRow) {
+          const value =
+            Number(
+              saleRow.dataset.value
+            ) || 0;
+  
+          totalValue += value;
+  
+          if (
+            saleRow.dataset.status ===
+            "paid"
+          ) {
+            paidValue += value;
+            paidCount += 1;
+          } else {
+            pendingValue += value;
+            pendingCount += 1;
+          }
+        }
+      );
+  
+      if (totalValueElement) {
+        totalValueElement.textContent =
+          formatCurrency(totalValue);
+      }
+  
+      if (paidValueElement) {
+        paidValueElement.textContent =
+          formatCurrency(paidValue);
+      }
+  
+      if (pendingValueElement) {
+        pendingValueElement.textContent =
+          formatCurrency(pendingValue);
+      }
+  
+      if (paidCountElement) {
+        paidCountElement.textContent =
+          paidCount === 1
+            ? "1 venda paga"
+            : paidCount +
+              " vendas pagas";
+      }
+  
+      if (pendingCountElement) {
+        pendingCountElement.textContent =
+          pendingCount === 1
+            ? "1 pagamento pendente"
+            : pendingCount +
+              " pagamentos pendentes";
+      }
+    }
+  
+  
+    /* ================================================================
+       PÁGINA DE VENDAS — FILTROS E PESQUISA
+       ================================================================ */
+  
+    function renderSales() {
+      const searchTerm =
+        normalizeSaleText(
+          searchInput
+            ? searchInput.value
+            : ""
+        );
+  
+      let visibleSales = 0;
+  
+      saleRows.forEach(
+        function (saleRow) {
+          const customerName =
+            normalizeSaleText(
+              saleRow.dataset.customer
+            );
+  
+          const saleStatus =
+            saleRow.dataset.status;
+  
+          const matchesSearch =
+            searchTerm === "" ||
+            customerName.includes(
+              searchTerm
+            );
+  
+          const matchesFilter =
+            selectedSaleFilter === "all" ||
+            selectedSaleFilter ===
+              saleStatus;
+  
+          const shouldShow =
+            matchesSearch &&
+            matchesFilter;
+  
+          saleRow.hidden =
+            !shouldShow;
+  
+          const saleId =
+            saleRow.dataset.saleId;
+  
+          const detailsRow =
+            document.querySelector(
+              "#details-" + saleId
+            );
+  
+          /*
+           * Fecha os detalhes se a venda deixar
+           * de aparecer no resultado do filtro.
+           */
+          if (!shouldShow && detailsRow) {
+            detailsRow.hidden = true;
+  
+            const viewButton =
+              saleRow.querySelector(
+                ".view-sale-button"
+              );
+  
+            if (viewButton) {
+              viewButton.setAttribute(
+                "aria-expanded",
+                "false"
+              );
+            }
+          }
+  
+          if (shouldShow) {
+            visibleSales += 1;
+          }
+        }
+      );
+  
+      if (emptySalesRow) {
+        emptySalesRow.hidden =
+          visibleSales > 0;
+      }
+  
+      if (resultsCount) {
+        if (visibleSales === 0) {
+          resultsCount.textContent =
+            "Nenhuma venda encontrada";
+        } else if (visibleSales === 1) {
+          resultsCount.textContent =
+            "1 venda encontrada";
+        } else {
+          resultsCount.textContent =
+            visibleSales +
+            " vendas encontradas";
+        }
+      }
+    }
+  
+  
+    /* ================================================================
+       PÁGINA DE VENDAS — VISUALIZAR DETALHES
+       ================================================================ */
+  
+    viewButtons.forEach(
+      function (button) {
+        button.addEventListener(
+          "click",
+          function () {
+            const detailsId =
+              button.getAttribute(
+                "aria-controls"
+              );
+  
+            const detailsRow =
+              document.getElementById(
+                detailsId
+              );
+  
+            if (!detailsRow) {
+              return;
+            }
+  
+            const isOpen =
+              button.getAttribute(
+                "aria-expanded"
+              ) === "true";
+  
+            /*
+             * Fecha os outros detalhes antes
+             * de abrir a venda selecionada.
+             */
+            viewButtons.forEach(
+              function (otherButton) {
+                if (
+                  otherButton !== button
+                ) {
+                  const otherDetailsId =
+                    otherButton.getAttribute(
+                      "aria-controls"
+                    );
+  
+                  const otherDetailsRow =
+                    document.getElementById(
+                      otherDetailsId
+                    );
+  
+                  otherButton.setAttribute(
+                    "aria-expanded",
+                    "false"
+                  );
+  
+                  if (otherDetailsRow) {
+                    otherDetailsRow.hidden =
+                      true;
+                  }
+                }
+              }
+            );
+  
+            button.setAttribute(
+              "aria-expanded",
+              String(!isOpen)
+            );
+  
+            detailsRow.hidden =
+              isOpen;
+          }
+        );
+      }
+    );
+  
+  
+    /* ================================================================
+       PÁGINA DE VENDAS — CONFIRMAR PAGAMENTO
+       ================================================================ */
+  
+    salesTableBody.addEventListener(
+      "click",
+      function (event) {
+        const paidButton =
+          event.target.closest(
+            ".mark-paid-button"
+          );
+  
+        if (!paidButton) {
+          return;
+        }
+  
+        const saleRow =
+          paidButton.closest(
+            ".sale-row"
+          );
+  
+        if (!saleRow) {
+          return;
+        }
+  
+        const customerName =
+          saleRow.dataset.customer;
+  
+        const confirmed =
+          window.confirm(
+            "Confirmar que a venda de " +
+            customerName +
+            " foi paga?"
+          );
+  
+        if (!confirmed) {
+          return;
+        }
+  
+        markRowAsPaid(
+          saleRow,
+          true
+        );
+  
+        updateSalesSummary();
+        renderSales();
+      }
+    );
+  
+  
+    /* ================================================================
+       PÁGINA DE VENDAS — EVENTOS DOS FILTROS
+       ================================================================ */
+  
+    filterButtons.forEach(
+      function (button) {
+        button.addEventListener(
+          "click",
+          function () {
+            selectedSaleFilter =
+              button.dataset.saleFilter ||
+              "all";
+  
+            filterButtons.forEach(
+              function (otherButton) {
+                const isSelected =
+                  otherButton === button;
+  
+                otherButton.classList.toggle(
+                  "is-selected",
+                  isSelected
+                );
+  
+                otherButton.setAttribute(
+                  "aria-pressed",
+                  String(isSelected)
+                );
+              }
+            );
+  
+            renderSales();
+          }
+        );
+      }
+    );
+  
+    if (searchInput) {
+      searchInput.addEventListener(
+        "input",
+        renderSales
+      );
+    }
+  
+  
+    /* ================================================================
+       PÁGINA DE VENDAS — BOTÃO NOVA VENDA
+       A função completa será implementada depois
+       ================================================================ */
+  
+    if (newSaleButton) {
+      newSaleButton.addEventListener(
+        "click",
+        function () {
+          window.alert(
+            "O cadastro de uma nova venda será criado na próxima etapa."
+          );
+        }
+      );
+    }
+  
+  
+    /* ================================================================
+       PÁGINA DE VENDAS — INICIALIZAÇÃO
+       ================================================================ */
+  
+    restoreSavedPayments();
+    updateSalesSummary();
+    renderSales();
+  
+  })();
