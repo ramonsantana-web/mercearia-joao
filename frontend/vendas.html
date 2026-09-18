@@ -42,10 +42,13 @@
 
     <aside class="sidebar" aria-label="Menu principal">
 
-      <a
+      <button
         class="owner-photo"
-        href="#"
-        aria-label="Perfil de João"
+        id="profile-menu-button"
+        type="button"
+        aria-label="Abrir menu do perfil de João"
+        aria-controls="profile-menu"
+        aria-expanded="false"
       >
         <img
           src="./assets/seu-joao.png"
@@ -53,7 +56,38 @@
           height="320"
           alt="João, proprietário da mercearia"
         >
-      </a>
+      </button>
+
+      <div
+        class="profile-menu"
+        id="profile-menu"
+        hidden
+      >
+        <div class="profile-menu-header">
+          <strong>João</strong>
+          <span>Proprietário</span>
+        </div>
+
+        <a
+          class="profile-menu-link"
+          href="#"
+          data-future-feature
+        >
+          Minha conta
+        </a>
+
+        <button
+          class="profile-menu-logout"
+          id="logout-button"
+          type="button"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M10 17l5-5-5-5M15 12H3M15 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4"/>
+          </svg>
+
+          Sair do sistema
+        </button>
+      </div>
 
       <nav
         class="primary-navigation"
@@ -96,7 +130,7 @@
 
         <a
           class="navigation-link"
-          href="#"
+          href="./clientes.html"
         >
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm6 0 2 2 4-5"/>
@@ -123,13 +157,6 @@
             aria-hidden="true"
           ></span>
         </button>
-
-        <span
-          class="owner-initials"
-          aria-hidden="true"
-        >
-          JS
-        </span>
 
       </div>
     </aside>
@@ -226,7 +253,13 @@
         aria-label="Resumo das vendas"
       >
 
-        <article class="glass-card sale-summary-card">
+        <button
+          class="glass-card sale-summary-card sale-summary-filter is-selected"
+          type="button"
+          data-sale-summary-filter="all"
+          aria-pressed="true"
+          aria-label="Mostrar todas as vendas"
+        >
 
           <div class="sale-summary-icon summary-blue">
             <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -244,9 +277,15 @@
             <small>5 vendas cadastradas</small>
           </div>
 
-        </article>
+        </button>
 
-        <article class="glass-card sale-summary-card">
+        <button
+          class="glass-card sale-summary-card sale-summary-filter"
+          type="button"
+          data-sale-summary-filter="paid"
+          aria-pressed="false"
+          aria-label="Mostrar somente as vendas recebidas"
+        >
 
           <div class="sale-summary-icon summary-green">
             <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -266,9 +305,15 @@
             </small>
           </div>
 
-        </article>
+        </button>
 
-        <article class="glass-card sale-summary-card">
+        <button
+          class="glass-card sale-summary-card sale-summary-filter"
+          type="button"
+          data-sale-summary-filter="pending"
+          aria-pressed="false"
+          aria-label="Mostrar somente as vendas a receber"
+        >
 
           <div class="sale-summary-icon summary-orange">
             <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -289,7 +334,7 @@
             </small>
           </div>
 
-        </article>
+        </button>
 
       </section>
 
@@ -353,19 +398,19 @@
           <button
             class="sale-filter-button"
             type="button"
-            data-sale-filter="pending"
+            data-sale-filter="paid"
             aria-pressed="false"
           >
-            Pendentes
+            Pagas
           </button>
 
           <button
             class="sale-filter-button"
             type="button"
-            data-sale-filter="paid"
+            data-sale-filter="pending"
             aria-pressed="false"
           >
-            Pagas
+            Pendentes
           </button>
 
         </div>
@@ -1023,6 +1068,127 @@
 
       </section>
     </section>
+
+    <!-- ============================================================
+         MODAL — NOVA VENDA
+         ============================================================ -->
+    <div
+      class="sale-modal"
+      id="new-sale-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="new-sale-title"
+      hidden
+    >
+      <div class="sale-modal-backdrop" data-close-sale-modal></div>
+
+      <section class="sale-modal-panel">
+        <header class="sale-modal-header">
+          <div>
+            <p>Registro de venda</p>
+            <h2 id="new-sale-title">Nova venda</h2>
+            <span>Escolha o cliente, adicione os produtos e confirme o pagamento.</span>
+          </div>
+
+          <button
+            class="sale-modal-close"
+            type="button"
+            aria-label="Fechar nova venda"
+            data-close-sale-modal
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m6 6 12 12M18 6 6 18"/>
+            </svg>
+          </button>
+        </header>
+
+        <form id="new-sale-form" novalidate>
+          <div class="sale-modal-body">
+            <section class="sale-form-section" aria-labelledby="sale-customer-title">
+              <header>
+                <span>01</span>
+                <div><h3 id="sale-customer-title">Cliente e datas</h3><p>Toda venda deve estar vinculada a um cliente.</p></div>
+              </header>
+
+              <div class="sale-form-grid">
+                <label class="sale-form-field sale-field-wide">
+                  <span>Cliente <b>*</b></span>
+                  <select id="sale-customer" required>
+                    <option value="">Selecione um cliente</option>
+                    <option value="Carlos Oliveira">Carlos Oliveira</option>
+                    <option value="Maria Santos">Maria Santos</option>
+                    <option value="João Silva">João Silva</option>
+                    <option value="Ana Costa">Ana Costa</option>
+                    <option value="Pedro Souza">Pedro Souza</option>
+                  </select>
+                  <small id="sale-customer-error"></small>
+                </label>
+
+                <label class="sale-form-field">
+                  <span>Data da venda <b>*</b></span>
+                  <input id="sale-date" type="date" required>
+                  <small id="sale-date-error"></small>
+                </label>
+
+                <label class="sale-form-field" id="sale-due-date-field">
+                  <span>Data de vencimento <b>*</b></span>
+                  <input id="sale-due-date" type="date">
+                  <small id="sale-due-date-error"></small>
+                </label>
+              </div>
+            </section>
+
+            <section class="sale-form-section" aria-labelledby="sale-products-title">
+              <header>
+                <span>02</span>
+                <div><h3 id="sale-products-title">Produtos da venda</h3><p>O valor total será calculado automaticamente.</p></div>
+              </header>
+
+              <div class="sale-product-picker">
+                <label class="sale-form-field">
+                  <span>Produto</span>
+                  <select id="sale-product-select"><option value="">Selecione um produto</option></select>
+                </label>
+
+                <label class="sale-form-field sale-quantity-field">
+                  <span>Quantidade</span>
+                  <input id="sale-product-quantity" type="number" min="1" step="1" value="1">
+                </label>
+
+                <button class="add-sale-product-button" id="add-sale-product" type="button">Adicionar</button>
+              </div>
+
+              <p class="sale-products-error" id="sale-products-error" role="status"></p>
+
+              <div class="sale-cart" id="sale-cart">
+                <div class="sale-cart-empty" id="sale-cart-empty">Nenhum produto adicionado.</div>
+                <div id="sale-cart-items"></div>
+              </div>
+            </section>
+
+            <section class="sale-form-section" aria-labelledby="sale-payment-title">
+              <header>
+                <span>03</span>
+                <div><h3 id="sale-payment-title">Pagamento</h3><p>Informe se a venda já foi paga ou ficará fiada.</p></div>
+              </header>
+
+              <div class="sale-payment-options">
+                <label><input type="radio" name="sale-payment-status" value="paid"><span><strong>Pago</strong><small>Pagamento recebido agora</small></span></label>
+                <label><input type="radio" name="sale-payment-status" value="pending" checked><span><strong>Fiado</strong><small>Pagamento será recebido depois</small></span></label>
+              </div>
+            </section>
+          </div>
+
+          <footer class="sale-modal-footer">
+            <div class="sale-modal-total"><span>Total da venda</span><strong id="new-sale-total">R$ 0,00</strong></div>
+            <div class="sale-modal-actions">
+              <button class="sale-cancel-button" type="button" data-close-sale-modal>Cancelar</button>
+              <button class="sale-save-button" id="save-new-sale" type="submit">Salvar venda</button>
+            </div>
+          </footer>
+        </form>
+      </section>
+    </div>
   </main>
 </body>
 </html>

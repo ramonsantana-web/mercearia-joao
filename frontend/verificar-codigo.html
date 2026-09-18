@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Confirme o código de recuperação da sua conta."
+  >
+
+  <meta
+    name="theme-color"
+    content="#e7e3dc"
+  >
+
+  <title>Verificar código | Mercearia do João</title>
+
+  <!-- CSS PRINCIPAL DO SISTEMA -->
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+</head>
+
+<body class="auth-page verificar-codigo-page">
+
+  <!-- ========================================
+       ACESSIBILIDADE
+  ========================================= -->
+
+  <a
+    class="skip-link"
+    href="#conteudo-verificar-codigo"
+  >
+    Pular para o conteúdo
+  </a>
+
+
+  <!-- ========================================
+       PÁGINA DE VERIFICAÇÃO DO CÓDIGO
+  ========================================= -->
+
+  <main
+    id="conteudo-verificar-codigo"
+    class="auth-layout"
+  >
+
+    <!-- ======================================
+         ÁREA VISUAL / APRESENTAÇÃO
+    ======================================= -->
+
+    <section
+      class="auth-visual"
+      aria-label="Verificação de segurança"
+    >
+
+      <!-- Imagem de fundo será aplicada pelo CSS -->
+      <div
+        class="auth-visual-overlay"
+        aria-hidden="true"
+      ></div>
+
+      <div class="auth-visual-content">
+
+        <!-- Marca do sistema -->
+        <a
+          class="auth-brand"
+          href="login.html"
+          aria-label="Mercearia do João — Voltar ao login"
+        >
+          <span
+            class="auth-brand-mark"
+            aria-hidden="true"
+          >
+            MJ
+          </span>
+
+          <span class="auth-brand-copy">
+            <strong>Mercearia do João</strong>
+            <small>Gestão simples e organizada</small>
+          </span>
+        </a>
+
+
+        <!-- Texto principal -->
+        <div class="auth-welcome">
+
+          <p class="auth-eyebrow">
+            Confirmação de segurança
+          </p>
+
+          <h1>
+            Verifique
+            <span>seu e-mail.</span>
+          </h1>
+
+          <p>
+            Enviamos um código temporário para confirmar
+            que esta conta realmente pertence a você.
+          </p>
+
+        </div>
+
+
+        <!-- Etapas da recuperação -->
+        <ol
+          class="recovery-steps"
+          aria-label="Etapas para recuperar a senha"
+        >
+
+          <li class="recovery-step is-complete">
+            <span
+              class="recovery-step-number"
+              aria-hidden="true"
+            >
+              ✓
+            </span>
+
+            <span class="recovery-step-copy">
+              <strong>E-mail informado</strong>
+              <small>Conta localizada.</small>
+            </span>
+          </li>
+
+          <li
+            class="recovery-step is-active"
+            aria-current="step"
+          >
+            <span class="recovery-step-number">2</span>
+
+            <span class="recovery-step-copy">
+              <strong>Confirme o código</strong>
+              <small>Digite os números recebidos.</small>
+            </span>
+          </li>
+
+          <li class="recovery-step">
+            <span class="recovery-step-number">3</span>
+
+            <span class="recovery-step-copy">
+              <strong>Crie uma nova senha</strong>
+              <small>Escolha uma senha segura.</small>
+            </span>
+          </li>
+
+        </ol>
+
+      </div>
+    </section>
+
+
+    <!-- ======================================
+         ÁREA DO FORMULÁRIO
+    ======================================= -->
+
+    <section
+      class="auth-form-area verification-form-area"
+      aria-labelledby="verificar-codigo-title"
+    >
+
+      <!-- Ações superiores -->
+      <div class="auth-top-actions">
+
+        <!-- Voltar para informar o e-mail -->
+        <a
+          class="auth-back-link"
+          href="recuperar-senha.html"
+          aria-label="Voltar para a recuperação de senha"
+        >
+          <span aria-hidden="true">←</span>
+          Voltar
+        </a>
+
+
+        <!-- Alternar tema -->
+        <button
+          class="theme-toggle"
+          type="button"
+          aria-label="Ativar modo escuro"
+          aria-pressed="false"
+        >
+
+          <span
+            class="theme-toggle-sun"
+            aria-hidden="true"
+          >
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2"></path>
+              <path d="M12 20v2"></path>
+              <path d="m4.93 4.93 1.42 1.42"></path>
+              <path d="m17.66 17.66 1.41 1.41"></path>
+              <path d="M2 12h2"></path>
+              <path d="M20 12h2"></path>
+              <path d="m6.34 17.66-1.41 1.41"></path>
+              <path d="m19.07 4.93-1.41 1.41"></path>
+            </svg>
+          </span>
+
+          <span
+            class="theme-toggle-track"
+            aria-hidden="true"
+          >
+            <span class="theme-toggle-thumb"></span>
+          </span>
+
+          <span
+            class="theme-toggle-moon"
+            aria-hidden="true"
+          >
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M21 12.79A9 9 0 1 1 11.21 3
+                   7 7 0 0 0 21 12.79Z"
+              ></path>
+            </svg>
+          </span>
+
+        </button>
+
+      </div>
+
+
+      <!-- Cartão de verificação -->
+      <div class="auth-card verification-card">
+
+        <!-- Ícone -->
+        <div
+          class="auth-card-icon"
+          aria-hidden="true"
+        >
+          <svg viewBox="0 0 24 24">
+            <rect
+              x="3"
+              y="5"
+              width="18"
+              height="14"
+              rx="3"
+            ></rect>
+
+            <path d="m3 7 9 6 9-6"></path>
+            <path d="M16 3v4"></path>
+          </svg>
+        </div>
+
+
+        <!-- Cabeçalho -->
+        <header class="auth-card-header">
+
+          <p class="auth-card-eyebrow">
+            Código enviado
+          </p>
+
+          <h2 id="verificar-codigo-title">
+            Digite o código
+          </h2>
+
+          <p>
+            Enviamos um código de 6 números para
+            <strong id="recovery-email">
+              jo***@email.com
+            </strong>
+          </p>
+
+        </header>
+
+
+        <!-- ==================================
+             MENSAGEM GERAL DO FORMULÁRIO
+        =================================== -->
+
+        <div
+          id="verificar-codigo-message"
+          class="form-message"
+          role="alert"
+          aria-live="polite"
+          hidden
+        ></div>
+
+
+        <!-- ==================================
+             FORMULÁRIO DE VERIFICAÇÃO
+        =================================== -->
+
+        <form
+          id="verificar-codigo-form"
+          class="auth-form verification-form"
+          action="nova-senha.html"
+          method="get"
+          novalidate
+        >
+
+          <fieldset class="code-fieldset">
+
+            <legend class="sr-only">
+              Código de recuperação com 6 números
+            </legend>
+
+            <p
+              id="codigo-instruction"
+              class="code-instruction"
+            >
+              Digite um número em cada campo.
+            </p>
+
+
+            <!-- Campos do código -->
+            <div
+              id="code-inputs"
+              class="code-inputs"
+              aria-describedby="codigo-instruction codigo-error"
+            >
+
+              <input
+                id="codigo-1"
+                class="code-input"
+                name="codigo1"
+                type="text"
+                inputmode="numeric"
+                autocomplete="one-time-code"
+                pattern="[0-9]"
+                maxlength="1"
+                aria-label="Primeiro número do código"
+                required
+                autofocus
+              >
+
+              <input
+                id="codigo-2"
+                class="code-input"
+                name="codigo2"
+                type="text"
+                inputmode="numeric"
+                pattern="[0-9]"
+                maxlength="1"
+                aria-label="Segundo número do código"
+                required
+              >
+
+              <input
+                id="codigo-3"
+                class="code-input"
+                name="codigo3"
+                type="text"
+                inputmode="numeric"
+                pattern="[0-9]"
+                maxlength="1"
+                aria-label="Terceiro número do código"
+                required
+              >
+
+              <input
+                id="codigo-4"
+                class="code-input"
+                name="codigo4"
+                type="text"
+                inputmode="numeric"
+                pattern="[0-9]"
+                maxlength="1"
+                aria-label="Quarto número do código"
+                required
+              >
+
+              <input
+                id="codigo-5"
+                class="code-input"
+                name="codigo5"
+                type="text"
+                inputmode="numeric"
+                pattern="[0-9]"
+                maxlength="1"
+                aria-label="Quinto número do código"
+                required
+              >
+
+              <input
+                id="codigo-6"
+                class="code-input"
+                name="codigo6"
+                type="text"
+                inputmode="numeric"
+                pattern="[0-9]"
+                maxlength="1"
+                aria-label="Sexto número do código"
+                required
+              >
+
+            </div>
+
+            <small
+              id="codigo-error"
+              class="field-error code-error"
+              aria-live="polite"
+            ></small>
+
+          </fieldset>
+
+
+          <!-- Tempo restante -->
+          <div class="code-expiration">
+
+            <span
+              class="code-expiration-icon"
+              aria-hidden="true"
+            >
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="9"></circle>
+                <path d="M12 7v5l3 2"></path>
+              </svg>
+            </span>
+
+            <p>
+              O código expira em
+              <strong id="code-countdown">
+                05:00
+              </strong>
+            </p>
+
+          </div>
+
+
+          <!-- Botão confirmar código -->
+          <button
+            id="verificar-codigo-submit"
+            class="primary-button verification-submit-button"
+            type="submit"
+          >
+
+            <span class="button-label">
+              Verificar código
+            </span>
+
+            <span
+              class="button-arrow"
+              aria-hidden="true"
+            >
+              →
+            </span>
+
+            <span
+              class="button-loading"
+              aria-hidden="true"
+              hidden
+            >
+              <span class="loading-spinner"></span>
+              Verificando...
+            </span>
+
+          </button>
+
+        </form>
+
+
+        <!-- ==================================
+             REENVIAR CÓDIGO
+        =================================== -->
+
+        <div class="resend-code">
+
+          <p>
+            Não recebeu o código?
+          </p>
+
+          <button
+            id="resend-code-button"
+            class="text-button"
+            type="button"
+          >
+            Reenviar código
+          </button>
+
+          <p
+            id="resend-feedback"
+            class="resend-feedback"
+            aria-live="polite"
+          ></p>
+
+        </div>
+
+
+        <!-- Informação de segurança -->
+        <div class="security-note">
+
+          <span
+            class="security-note-icon"
+            aria-hidden="true"
+          >
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 22s8-4 8-10V5l-8-3-8 3v7
+                   c0 6 8 10 8 10Z"
+              ></path>
+
+              <path d="m9 12 2 2 4-4"></path>
+            </svg>
+          </span>
+
+          <p>
+            Nunca compartilhe este código com outras pessoas.
+          </p>
+
+        </div>
+
+
+        <!-- Alterar o e-mail -->
+        <div class="auth-alternative">
+
+          <span>
+            Informou o e-mail errado?
+          </span>
+
+          <a href="recuperar-senha.html">
+            Alterar e-mail
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <!-- Rodapé -->
+      <footer class="auth-footer">
+
+        <p>
+          © 2026 Mercearia do João
+        </p>
+
+        <span aria-hidden="true">•</span>
+
+        <p>
+          Sistema de gestão
+        </p>
+
+      </footer>
+
+    </section>
+
+  </main>
+
+
+  <!-- JAVASCRIPT PRINCIPAL DO SISTEMA -->
+  <script src="js/script.js"></script>
+
+</body>
+</html>

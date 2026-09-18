@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Recupere sua senha do sistema Mercearia do João."
+  >
+
+  <meta
+    name="theme-color"
+    content="#e7e3dc"
+  >
+
+  <title>Recuperar senha | Mercearia do João</title>
+
+  <!-- CSS PRINCIPAL DO SISTEMA -->
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+</head>
+
+<body class="auth-page recuperar-senha-page">
+
+  <!-- ========================================
+       ACESSIBILIDADE
+  ========================================= -->
+
+  <a
+    class="skip-link"
+    href="#conteudo-recuperar-senha"
+  >
+    Pular para o conteúdo
+  </a>
+
+
+  <!-- ========================================
+       PÁGINA DE RECUPERAÇÃO DE SENHA
+  ========================================= -->
+
+  <main
+    id="conteudo-recuperar-senha"
+    class="auth-layout"
+  >
+
+    <!-- ======================================
+         ÁREA VISUAL / APRESENTAÇÃO
+    ======================================= -->
+
+    <section
+      class="auth-visual"
+      aria-label="Recuperação de acesso"
+    >
+
+      <!-- Imagem de fundo será aplicada pelo CSS -->
+      <div
+        class="auth-visual-overlay"
+        aria-hidden="true"
+      ></div>
+
+      <div class="auth-visual-content">
+
+        <!-- Marca do sistema -->
+        <a
+          class="auth-brand"
+          href="login.html"
+          aria-label="Mercearia do João — Voltar ao login"
+        >
+          <span
+            class="auth-brand-mark"
+            aria-hidden="true"
+          >
+            MJ
+          </span>
+
+          <span class="auth-brand-copy">
+            <strong>Mercearia do João</strong>
+            <small>Gestão simples e organizada</small>
+          </span>
+        </a>
+
+
+        <!-- Texto principal -->
+        <div class="auth-welcome">
+
+          <p class="auth-eyebrow">
+            Recuperação de acesso
+          </p>
+
+          <h1>
+            Vamos recuperar
+            <span>o seu acesso.</span>
+          </h1>
+
+          <p>
+            Informe o e-mail usado no cadastro.
+            Enviaremos um código para você criar uma nova senha.
+          </p>
+
+        </div>
+
+
+        <!-- Etapas da recuperação -->
+        <ol
+          class="recovery-steps"
+          aria-label="Etapas para recuperar a senha"
+        >
+
+          <li class="recovery-step is-active">
+            <span class="recovery-step-number">1</span>
+
+            <span class="recovery-step-copy">
+              <strong>Informe seu e-mail</strong>
+              <small>Localizaremos sua conta.</small>
+            </span>
+          </li>
+
+          <li class="recovery-step">
+            <span class="recovery-step-number">2</span>
+
+            <span class="recovery-step-copy">
+              <strong>Confirme o código</strong>
+              <small>Verifique sua caixa de entrada.</small>
+            </span>
+          </li>
+
+          <li class="recovery-step">
+            <span class="recovery-step-number">3</span>
+
+            <span class="recovery-step-copy">
+              <strong>Crie uma nova senha</strong>
+              <small>Escolha uma senha segura.</small>
+            </span>
+          </li>
+
+        </ol>
+
+      </div>
+    </section>
+
+
+    <!-- ======================================
+         ÁREA DO FORMULÁRIO
+    ======================================= -->
+
+    <section
+      class="auth-form-area recovery-form-area"
+      aria-labelledby="recuperar-senha-title"
+    >
+
+      <!-- Ações superiores -->
+      <div class="auth-top-actions">
+
+        <!-- Voltar ao login -->
+        <a
+          class="auth-back-link"
+          href="login.html"
+          aria-label="Voltar para a página de login"
+        >
+          <span aria-hidden="true">←</span>
+          Voltar
+        </a>
+
+
+        <!-- Alternar tema -->
+        <button
+          class="theme-toggle"
+          type="button"
+          aria-label="Ativar modo escuro"
+          aria-pressed="false"
+        >
+
+          <span
+            class="theme-toggle-sun"
+            aria-hidden="true"
+          >
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2"></path>
+              <path d="M12 20v2"></path>
+              <path d="m4.93 4.93 1.42 1.42"></path>
+              <path d="m17.66 17.66 1.41 1.41"></path>
+              <path d="M2 12h2"></path>
+              <path d="M20 12h2"></path>
+              <path d="m6.34 17.66-1.41 1.41"></path>
+              <path d="m19.07 4.93-1.41 1.41"></path>
+            </svg>
+          </span>
+
+          <span
+            class="theme-toggle-track"
+            aria-hidden="true"
+          >
+            <span class="theme-toggle-thumb"></span>
+          </span>
+
+          <span
+            class="theme-toggle-moon"
+            aria-hidden="true"
+          >
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M21 12.79A9 9 0 1 1 11.21 3
+                   7 7 0 0 0 21 12.79Z"
+              ></path>
+            </svg>
+          </span>
+
+        </button>
+
+      </div>
+
+
+      <!-- Cartão de recuperação -->
+      <div class="auth-card recovery-card">
+
+        <!-- Ícone de segurança -->
+        <div
+          class="auth-card-icon"
+          aria-hidden="true"
+        >
+          <svg viewBox="0 0 24 24">
+            <rect
+              x="3"
+              y="5"
+              width="18"
+              height="14"
+              rx="3"
+            ></rect>
+
+            <path d="m3 7 9 6 9-6"></path>
+          </svg>
+        </div>
+
+
+        <!-- Cabeçalho -->
+        <header class="auth-card-header">
+
+          <p class="auth-card-eyebrow">
+            Esqueceu sua senha?
+          </p>
+
+          <h2 id="recuperar-senha-title">
+            Recupere sua conta
+          </h2>
+
+          <p>
+            Digite o e-mail cadastrado para receber
+            o código de recuperação.
+          </p>
+
+        </header>
+
+
+        <!-- ==================================
+             MENSAGEM GERAL DO FORMULÁRIO
+
+             Será controlada pelo JavaScript.
+        =================================== -->
+
+        <div
+          id="recuperar-senha-message"
+          class="form-message"
+          role="alert"
+          aria-live="polite"
+          hidden
+        ></div>
+
+
+        <!-- ==================================
+             FORMULÁRIO DE RECUPERAÇÃO
+        =================================== -->
+
+        <form
+          id="recuperar-senha-form"
+          class="auth-form recovery-form"
+          action="verificar-codigo.html"
+          method="get"
+          novalidate
+        >
+
+          <!-- Campo de e-mail -->
+          <div class="form-group">
+
+            <label for="recuperar-email">
+              E-mail cadastrado
+            </label>
+
+            <div class="input-wrapper">
+
+              <span
+                class="input-icon"
+                aria-hidden="true"
+              >
+                <svg viewBox="0 0 24 24">
+                  <rect
+                    x="3"
+                    y="5"
+                    width="18"
+                    height="14"
+                    rx="3"
+                  ></rect>
+
+                  <path d="m3 7 9 6 9-6"></path>
+                </svg>
+              </span>
+
+              <input
+                id="recuperar-email"
+                class="form-control"
+                name="email"
+                type="email"
+                placeholder="seuemail@exemplo.com"
+                autocomplete="email"
+                inputmode="email"
+                maxlength="150"
+                aria-describedby="recuperar-email-help recuperar-email-error"
+                required
+              >
+
+            </div>
+
+            <small
+              id="recuperar-email-help"
+              class="field-help"
+            >
+              Use o mesmo e-mail informado na criação da conta.
+            </small>
+
+            <small
+              id="recuperar-email-error"
+              class="field-error"
+              aria-live="polite"
+            ></small>
+
+          </div>
+
+
+          <!-- Botão enviar código -->
+          <button
+            id="recuperar-senha-submit"
+            class="primary-button recovery-submit-button"
+            type="submit"
+          >
+
+            <span class="button-label">
+              Enviar código
+            </span>
+
+            <span
+              class="button-arrow"
+              aria-hidden="true"
+            >
+              →
+            </span>
+
+            <span
+              class="button-loading"
+              aria-hidden="true"
+              hidden
+            >
+              <span class="loading-spinner"></span>
+              Enviando...
+            </span>
+
+          </button>
+
+        </form>
+
+
+        <!-- ==================================
+             INFORMAÇÃO DE SEGURANÇA
+        =================================== -->
+
+        <div class="security-note">
+
+          <span
+            class="security-note-icon"
+            aria-hidden="true"
+          >
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 22s8-4 8-10V5l-8-3-8 3v7
+                   c0 6 8 10 8 10Z"
+              ></path>
+
+              <path d="m9 12 2 2 4-4"></path>
+            </svg>
+          </span>
+
+          <p>
+            Por segurança, o código terá tempo limitado
+            para ser utilizado.
+          </p>
+
+        </div>
+
+
+        <!-- Link para o login -->
+        <div class="auth-alternative">
+
+          <span>
+            Lembrou sua senha?
+          </span>
+
+          <a href="login.html">
+            Voltar para o login
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <!-- Rodapé -->
+      <footer class="auth-footer">
+
+        <p>
+          © 2026 Mercearia do João
+        </p>
+
+        <span aria-hidden="true">•</span>
+
+        <p>
+          Sistema de gestão
+        </p>
+
+      </footer>
+
+    </section>
+
+  </main>
+
+
+  <!-- JAVASCRIPT PRINCIPAL DO SISTEMA -->
+  <script src="js/script.js"></script>
+
+</body>
+</html>

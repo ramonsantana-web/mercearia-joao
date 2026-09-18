@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Crie sua conta no sistema de gestão da Mercearia do João."
+  >
+
+  <meta
+    name="theme-color"
+    content="#e7e3dc"
+  >
+
+  <title>Criar conta | Mercearia do João</title>
+
+  <!-- CSS PRINCIPAL DO SISTEMA -->
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+</head>
+
+<body class="auth-page cadastro-page">
+
+  <!-- ========================================
+       ACESSIBILIDADE
+  ========================================= -->
+
+  <a
+    class="skip-link"
+    href="#conteudo-cadastro"
+  >
+    Pular para o conteúdo
+  </a>
+
+
+  <!-- ========================================
+       PÁGINA DE CADASTRO
+  ========================================= -->
+
+  <main
+    id="conteudo-cadastro"
+    class="auth-layout"
+  >
+
+    <!-- ======================================
+         ÁREA VISUAL / APRESENTAÇÃO
+    ======================================= -->
+
+    <section
+      class="auth-visual"
+      aria-label="Apresentação da Mercearia do João"
+    >
+
+      <!-- Imagem de fundo será aplicada no CSS -->
+      <div
+        class="auth-visual-overlay"
+        aria-hidden="true"
+      ></div>
+
+      <div class="auth-visual-content">
+
+        <!-- Marca do sistema -->
+        <a
+          class="auth-brand"
+          href="login.html"
+          aria-label="Mercearia do João — Voltar ao login"
+        >
+          <span
+            class="auth-brand-mark"
+            aria-hidden="true"
+          >
+            MJ
+          </span>
+
+          <span class="auth-brand-copy">
+            <strong>Mercearia do João</strong>
+            <small>Gestão simples e organizada</small>
+          </span>
+        </a>
+
+
+        <!-- Texto principal -->
+        <div class="auth-welcome">
+
+          <p class="auth-eyebrow">
+            Comece agora
+          </p>
+
+          <h1>
+            Sua mercearia,
+            <span>mais organizada.</span>
+          </h1>
+
+          <p>
+            Crie sua conta para controlar produtos,
+            vendas, clientes e pagamentos em um só lugar.
+          </p>
+
+        </div>
+
+
+        <!-- Benefícios -->
+        <ul
+          class="auth-benefits"
+          aria-label="Benefícios do sistema"
+        >
+
+          <li>
+            <span
+              class="auth-benefit-icon"
+              aria-hidden="true"
+            >
+              ✓
+            </span>
+
+            <span>
+              Cadastro rápido e simples
+            </span>
+          </li>
+
+          <li>
+            <span
+              class="auth-benefit-icon"
+              aria-hidden="true"
+            >
+              ✓
+            </span>
+
+            <span>
+              Controle completo da mercearia
+            </span>
+          </li>
+
+          <li>
+            <span
+              class="auth-benefit-icon"
+              aria-hidden="true"
+            >
+              ✓
+            </span>
+
+            <span>
+              Informações organizadas e acessíveis
+            </span>
+          </li>
+
+        </ul>
+
+      </div>
+    </section>
+
+
+    <!-- ======================================
+         ÁREA DO FORMULÁRIO
+    ======================================= -->
+
+    <section
+      class="auth-form-area cadastro-form-area"
+      aria-labelledby="cadastro-title"
+    >
+
+      <!-- Ações superiores -->
+      <div class="auth-top-actions">
+
+        <!-- Voltar ao login -->
+        <a
+          class="auth-back-link"
+          href="login.html"
+          aria-label="Voltar para a página de login"
+        >
+          <span aria-hidden="true">←</span>
+          Voltar
+        </a>
+
+
+        <!-- Alternar tema -->
+        <button
+          class="theme-toggle"
+          type="button"
+          aria-label="Ativar modo escuro"
+          aria-pressed="false"
+        >
+
+          <span
+            class="theme-toggle-sun"
+            aria-hidden="true"
+          >
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2"></path>
+              <path d="M12 20v2"></path>
+              <path d="m4.93 4.93 1.42 1.42"></path>
+              <path d="m17.66 17.66 1.41 1.41"></path>
+              <path d="M2 12h2"></path>
+              <path d="M20 12h2"></path>
+              <path d="m6.34 17.66-1.41 1.41"></path>
+              <path d="m19.07 4.93-1.41 1.41"></path>
+            </svg>
+          </span>
+
+          <span
+            class="theme-toggle-track"
+            aria-hidden="true"
+          >
+            <span class="theme-toggle-thumb"></span>
+          </span>
+
+          <span
+            class="theme-toggle-moon"
+            aria-hidden="true"
+          >
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M21 12.79A9 9 0 1 1 11.21 3
+                   7 7 0 0 0 21 12.79Z"
+              ></path>
+            </svg>
+          </span>
+
+        </button>
+
+      </div>
+
+
+      <!-- Cartão de cadastro -->
+      <div class="auth-card cadastro-card">
+
+        <!-- Cabeçalho -->
+        <header class="auth-card-header">
+
+          <p class="auth-card-eyebrow">
+            Nova conta
+          </p>
+
+          <h2 id="cadastro-title">
+            Crie sua conta
+          </h2>
+
+          <p>
+            Preencha seus dados e os dados da sua mercearia.
+          </p>
+
+        </header>
+
+
+        <!-- ==================================
+             MENSAGEM GERAL DO FORMULÁRIO
+
+             Será controlada pelo JavaScript.
+        =================================== -->
+
+        <div
+          id="cadastro-message"
+          class="form-message"
+          role="alert"
+          aria-live="polite"
+          hidden
+        ></div>
+
+
+        <!-- ==================================
+             FORMULÁRIO DE CADASTRO
+        =================================== -->
+
+        <form
+          id="cadastro-form"
+          class="auth-form cadastro-form"
+          action="login.html"
+          method="get"
+          novalidate
+        >
+
+          <!-- ==================================
+               DADOS DO PROPRIETÁRIO
+          =================================== -->
+
+          <fieldset class="form-section">
+
+            <legend>
+              Seus dados
+            </legend>
+
+            <div class="form-grid">
+
+              <!-- Nome completo -->
+              <div class="form-group form-group-full">
+
+                <label for="cadastro-nome">
+                  Nome completo
+                </label>
+
+                <div class="input-wrapper">
+
+                  <span
+                    class="input-icon"
+                    aria-hidden="true"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <circle cx="12" cy="8" r="4"></circle>
+                      <path
+                        d="M4 21a8 8 0 0 1 16 0"
+                      ></path>
+                    </svg>
+                  </span>
+
+                  <input
+                    id="cadastro-nome"
+                    class="form-control"
+                    name="nome"
+                    type="text"
+                    placeholder="Digite seu nome completo"
+                    autocomplete="name"
+                    minlength="3"
+                    maxlength="120"
+                    aria-describedby="cadastro-nome-error"
+                    required
+                  >
+
+                </div>
+
+                <small
+                  id="cadastro-nome-error"
+                  class="field-error"
+                  aria-live="polite"
+                ></small>
+
+              </div>
+
+
+              <!-- CPF -->
+              <div class="form-group">
+
+                <label for="cadastro-cpf">
+                  CPF
+                </label>
+
+                <div class="input-wrapper">
+
+                  <span
+                    class="input-icon"
+                    aria-hidden="true"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <rect
+                        x="3"
+                        y="5"
+                        width="18"
+                        height="14"
+                        rx="3"
+                      ></rect>
+                      <path d="M7 9h4"></path>
+                      <path d="M7 13h2"></path>
+                      <path d="M14 10h3"></path>
+                      <path d="M14 14h3"></path>
+                    </svg>
+                  </span>
+
+                  <input
+                    id="cadastro-cpf"
+                    class="form-control"
+                    name="cpf"
+                    type="text"
+                    placeholder="000.000.000-00"
+                    autocomplete="off"
+                    inputmode="numeric"
+                    maxlength="14"
+                    aria-describedby="cadastro-cpf-error"
+                    required
+                  >
+
+                </div>
+
+                <small
+                  id="cadastro-cpf-error"
+                  class="field-error"
+                  aria-live="polite"
+                ></small>
+
+              </div>
+
+
+              <!-- Telefone -->
+              <div class="form-group">
+
+                <label for="cadastro-telefone">
+                  Telefone
+                </label>
+
+                <div class="input-wrapper">
+
+                  <span
+                    class="input-icon"
+                    aria-hidden="true"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M22 16.92v3a2 2 0 0 1-2.18 2
+                           19.79 19.79 0 0 1-8.63-3.07
+                           19.5 19.5 0 0 1-6-6
+                           19.79 19.79 0 0 1-3.07-8.67
+                           A2 2 0 0 1 3.9 2h3
+                           a2 2 0 0 1 2 1.72
+                           c.12.9.33 1.78.62 2.63
+                           a2 2 0 0 1-.45 2.11L7.8 9.73
+                           a16 16 0 0 0 6 6l1.27-1.27
+                           a2 2 0 0 1 2.11-.45
+                           c.85.29 1.73.5 2.63.62
+                           A2 2 0 0 1 22 16.92Z"
+                      ></path>
+                    </svg>
+                  </span>
+
+                  <input
+                    id="cadastro-telefone"
+                    class="form-control"
+                    name="telefone"
+                    type="tel"
+                    placeholder="(00) 00000-0000"
+                    autocomplete="tel"
+                    inputmode="tel"
+                    maxlength="15"
+                    aria-describedby="cadastro-telefone-error"
+                    required
+                  >
+
+                </div>
+
+                <small
+                  id="cadastro-telefone-error"
+                  class="field-error"
+                  aria-live="polite"
+                ></small>
+
+              </div>
+
+            </div>
+
+          </fieldset>
+
+
+          <!-- ==================================
+               DADOS DA MERCEARIA
+          =================================== -->
+
+          <fieldset class="form-section">
+
+            <legend>
+              Dados da mercearia
+            </legend>
+
+            <div class="form-grid">
+
+              <!-- Nome da mercearia -->
+              <div class="form-group form-group-full">
+
+                <label for="cadastro-mercearia">
+                  Nome da mercearia
+                </label>
+
+                <div class="input-wrapper">
+
+                  <span
+                    class="input-icon"
+                    aria-hidden="true"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d="M3 9h18"></path>
+                      <path d="M5 9v11h14V9"></path>
+                      <path d="m4 9 2-5h12l2 5"></path>
+                      <path d="M9 20v-6h6v6"></path>
+                    </svg>
+                  </span>
+
+                  <input
+                    id="cadastro-mercearia"
+                    class="form-control"
+                    name="mercearia"
+                    type="text"
+                    placeholder="Ex.: Mercearia do João"
+                    autocomplete="organization"
+                    minlength="2"
+                    maxlength="120"
+                    aria-describedby="cadastro-mercearia-error"
+                    required
+                  >
+
+                </div>
+
+                <small
+                  id="cadastro-mercearia-error"
+                  class="field-error"
+                  aria-live="polite"
+                ></small>
+
+              </div>
+
+            </div>
+
+          </fieldset>
+
+
+          <!-- ==================================
+               DADOS DE ACESSO
+          =================================== -->
+
+          <fieldset class="form-section">
+
+            <legend>
+              Dados de acesso
+            </legend>
+
+            <div class="form-grid">
+
+              <!-- E-mail -->
+              <div class="form-group form-group-full">
+
+                <label for="cadastro-email">
+                  E-mail
+                </label>
+
+                <div class="input-wrapper">
+
+                  <span
+                    class="input-icon"
+                    aria-hidden="true"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <rect
+                        x="3"
+                        y="5"
+                        width="18"
+                        height="14"
+                        rx="3"
+                      ></rect>
+                      <path d="m3 7 9 6 9-6"></path>
+                    </svg>
+                  </span>
+
+                  <input
+                    id="cadastro-email"
+                    class="form-control"
+                    name="email"
+                    type="email"
+                    placeholder="seuemail@exemplo.com"
+                    autocomplete="email"
+                    inputmode="email"
+                    maxlength="150"
+                    aria-describedby="cadastro-email-error"
+                    required
+                  >
+
+                </div>
+
+                <small
+                  id="cadastro-email-error"
+                  class="field-error"
+                  aria-live="polite"
+                ></small>
+
+              </div>
+
+
+              <!-- Senha -->
+              <div class="form-group">
+
+                <label for="cadastro-senha">
+                  Senha
+                </label>
+
+                <div class="input-wrapper">
+
+                  <span
+                    class="input-icon"
+                    aria-hidden="true"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <rect
+                        x="4"
+                        y="10"
+                        width="16"
+                        height="11"
+                        rx="3"
+                      ></rect>
+                      <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+                      <path d="M12 14v3"></path>
+                    </svg>
+                  </span>
+
+                  <input
+                    id="cadastro-senha"
+                    class="form-control form-control-password"
+                    name="senha"
+                    type="password"
+                    placeholder="Crie uma senha"
+                    autocomplete="new-password"
+                    minlength="8"
+                    maxlength="60"
+                    aria-describedby="cadastro-senha-help cadastro-senha-error"
+                    required
+                  >
+
+                  <button
+                    class="password-toggle"
+                    type="button"
+                    data-password-target="cadastro-senha"
+                    aria-label="Mostrar senha"
+                    aria-pressed="false"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M2 12s3.5-7 10-7
+                           10 7 10 7-3.5 7-10 7
+                           S2 12 2 12Z"
+                      ></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                  </button>
+
+                </div>
+
+                <small
+                  id="cadastro-senha-help"
+                  class="field-help"
+                >
+                  Use pelo menos 8 caracteres, com letra e número.
+                </small>
+
+                <small
+                  id="cadastro-senha-error"
+                  class="field-error"
+                  aria-live="polite"
+                ></small>
+
+              </div>
+
+
+              <!-- Confirmar senha -->
+              <div class="form-group">
+
+                <label for="cadastro-confirmar-senha">
+                  Confirmar senha
+                </label>
+
+                <div class="input-wrapper">
+
+                  <span
+                    class="input-icon"
+                    aria-hidden="true"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <rect
+                        x="4"
+                        y="10"
+                        width="16"
+                        height="11"
+                        rx="3"
+                      ></rect>
+                      <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+                      <path d="m9 16 2 2 4-4"></path>
+                    </svg>
+                  </span>
+
+                  <input
+                    id="cadastro-confirmar-senha"
+                    class="form-control form-control-password"
+                    name="confirmarSenha"
+                    type="password"
+                    placeholder="Digite a senha novamente"
+                    autocomplete="new-password"
+                    minlength="8"
+                    maxlength="60"
+                    aria-describedby="cadastro-confirmar-senha-error"
+                    required
+                  >
+
+                  <button
+                    class="password-toggle"
+                    type="button"
+                    data-password-target="cadastro-confirmar-senha"
+                    aria-label="Mostrar confirmação de senha"
+                    aria-pressed="false"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M2 12s3.5-7 10-7
+                           10 7 10 7-3.5 7-10 7
+                           S2 12 2 12Z"
+                      ></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                  </button>
+
+                </div>
+
+                <small
+                  id="cadastro-confirmar-senha-error"
+                  class="field-error"
+                  aria-live="polite"
+                ></small>
+
+              </div>
+
+            </div>
+
+          </fieldset>
+
+
+          <!-- ==================================
+               ACEITE DOS TERMOS
+          =================================== -->
+
+          <div class="form-group terms-group">
+
+            <label class="checkbox-field">
+
+              <input
+                id="cadastro-termos"
+                name="termos"
+                type="checkbox"
+                aria-describedby="cadastro-termos-error"
+                required
+              >
+
+              <span
+                class="custom-checkbox"
+                aria-hidden="true"
+              >
+                <svg viewBox="0 0 16 16">
+                  <path d="m3 8 3 3 7-7"></path>
+                </svg>
+              </span>
+
+              <span>
+                Li e aceito os
+                <a href="#" class="inline-link">
+                  termos de uso
+                </a>
+                e a
+                <a href="#" class="inline-link">
+                  política de privacidade
+                </a>.
+              </span>
+
+            </label>
+
+            <small
+              id="cadastro-termos-error"
+              class="field-error"
+              aria-live="polite"
+            ></small>
+
+          </div>
+
+
+          <!-- ==================================
+               BOTÃO CRIAR CONTA
+          =================================== -->
+
+          <button
+            id="cadastro-submit"
+            class="primary-button cadastro-submit-button"
+            type="submit"
+          >
+
+            <span class="button-label">
+              Criar minha conta
+            </span>
+
+            <span
+              class="button-arrow"
+              aria-hidden="true"
+            >
+              →
+            </span>
+
+            <span
+              class="button-loading"
+              aria-hidden="true"
+              hidden
+            >
+              <span class="loading-spinner"></span>
+              Criando conta...
+            </span>
+
+          </button>
+
+        </form>
+
+
+        <!-- ==================================
+             LINK PARA O LOGIN
+        =================================== -->
+
+        <div class="auth-alternative">
+
+          <span>
+            Já possui uma conta?
+          </span>
+
+          <a href="login.html">
+            Entrar
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <!-- Rodapé -->
+      <footer class="auth-footer">
+
+        <p>
+          © 2026 Mercearia do João
+        </p>
+
+        <span aria-hidden="true">•</span>
+
+        <p>
+          Sistema de gestão
+        </p>
+
+      </footer>
+
+    </section>
+
+  </main>
+
+
+  <!-- JAVASCRIPT PRINCIPAL DO SISTEMA -->
+  <script src="js/script.js"></script>
+
+</body>
+</html>

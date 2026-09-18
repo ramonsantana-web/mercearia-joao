@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Crie uma nova senha para acessar o sistema Mercearia do João."
+  >
+
+  <meta
+    name="theme-color"
+    content="#e7e3dc"
+  >
+
+  <title>Nova senha | Mercearia do João</title>
+
+  <!-- CSS PRINCIPAL DO SISTEMA -->
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+</head>
+
+<body class="auth-page nova-senha-page">
+
+  <!-- ========================================
+       ACESSIBILIDADE
+  ========================================= -->
+
+  <a
+    class="skip-link"
+    href="#conteudo-nova-senha"
+  >
+    Pular para o conteúdo
+  </a>
+
+
+  <!-- ========================================
+       PÁGINA DE NOVA SENHA
+  ========================================= -->
+
+  <main
+    id="conteudo-nova-senha"
+    class="auth-layout"
+  >
+
+    <!-- ======================================
+         ÁREA VISUAL / APRESENTAÇÃO
+    ======================================= -->
+
+    <section
+      class="auth-visual"
+      aria-label="Criação de nova senha"
+    >
+
+      <!-- Imagem de fundo será aplicada pelo CSS -->
+      <div
+        class="auth-visual-overlay"
+        aria-hidden="true"
+      ></div>
+
+      <div class="auth-visual-content">
+
+        <!-- Marca do sistema -->
+        <a
+          class="auth-brand"
+          href="login.html"
+          aria-label="Mercearia do João — Voltar ao login"
+        >
+          <span
+            class="auth-brand-mark"
+            aria-hidden="true"
+          >
+            MJ
+          </span>
+
+          <span class="auth-brand-copy">
+            <strong>Mercearia do João</strong>
+            <small>Gestão simples e organizada</small>
+          </span>
+        </a>
+
+
+        <!-- Texto principal -->
+        <div class="auth-welcome">
+
+          <p class="auth-eyebrow">
+            Última etapa
+          </p>
+
+          <h1>
+            Proteja
+            <span>sua conta.</span>
+          </h1>
+
+          <p>
+            Crie uma nova senha segura e diferente
+            da senha utilizada anteriormente.
+          </p>
+
+        </div>
+
+
+        <!-- Etapas da recuperação -->
+        <ol
+          class="recovery-steps"
+          aria-label="Etapas para recuperar a senha"
+        >
+
+          <li class="recovery-step is-complete">
+
+            <span
+              class="recovery-step-number"
+              aria-hidden="true"
+            >
+              ✓
+            </span>
+
+            <span class="recovery-step-copy">
+              <strong>E-mail informado</strong>
+              <small>Conta localizada.</small>
+            </span>
+
+          </li>
+
+          <li class="recovery-step is-complete">
+
+            <span
+              class="recovery-step-number"
+              aria-hidden="true"
+            >
+              ✓
+            </span>
+
+            <span class="recovery-step-copy">
+              <strong>Código confirmado</strong>
+              <small>Identidade verificada.</small>
+            </span>
+
+          </li>
+
+          <li
+            class="recovery-step is-active"
+            aria-current="step"
+          >
+
+            <span class="recovery-step-number">
+              3
+            </span>
+
+            <span class="recovery-step-copy">
+              <strong>Crie uma nova senha</strong>
+              <small>Defina seu novo acesso.</small>
+            </span>
+
+          </li>
+
+        </ol>
+
+      </div>
+    </section>
+
+
+    <!-- ======================================
+         ÁREA DO FORMULÁRIO
+    ======================================= -->
+
+    <section
+      class="auth-form-area new-password-form-area"
+      aria-labelledby="nova-senha-title"
+    >
+
+      <!-- Ações superiores -->
+      <div class="auth-top-actions">
+
+        <!-- Voltar para o código -->
+        <a
+          class="auth-back-link"
+          href="verificar-codigo.html"
+          aria-label="Voltar para a verificação do código"
+        >
+          <span aria-hidden="true">←</span>
+          Voltar
+        </a>
+
+
+        <!-- Alternar tema -->
+        <button
+          class="theme-toggle"
+          type="button"
+          aria-label="Ativar modo escuro"
+          aria-pressed="false"
+        >
+
+          <span
+            class="theme-toggle-sun"
+            aria-hidden="true"
+          >
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2"></path>
+              <path d="M12 20v2"></path>
+              <path d="m4.93 4.93 1.42 1.42"></path>
+              <path d="m17.66 17.66 1.41 1.41"></path>
+              <path d="M2 12h2"></path>
+              <path d="M20 12h2"></path>
+              <path d="m6.34 17.66-1.41 1.41"></path>
+              <path d="m19.07 4.93-1.41 1.41"></path>
+            </svg>
+          </span>
+
+          <span
+            class="theme-toggle-track"
+            aria-hidden="true"
+          >
+            <span class="theme-toggle-thumb"></span>
+          </span>
+
+          <span
+            class="theme-toggle-moon"
+            aria-hidden="true"
+          >
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M21 12.79A9 9 0 1 1 11.21 3
+                   7 7 0 0 0 21 12.79Z"
+              ></path>
+            </svg>
+          </span>
+
+        </button>
+
+      </div>
+
+
+      <!-- Cartão da nova senha -->
+      <div class="auth-card new-password-card">
+
+        <!-- Ícone -->
+        <div
+          class="auth-card-icon"
+          aria-hidden="true"
+        >
+          <svg viewBox="0 0 24 24">
+            <rect
+              x="4"
+              y="10"
+              width="16"
+              height="11"
+              rx="3"
+            ></rect>
+
+            <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+            <path d="m9 16 2 2 4-4"></path>
+          </svg>
+        </div>
+
+
+        <!-- Cabeçalho -->
+        <header class="auth-card-header">
+
+          <p class="auth-card-eyebrow">
+            Acesso confirmado
+          </p>
+
+          <h2 id="nova-senha-title">
+            Crie uma nova senha
+          </h2>
+
+          <p>
+            Sua nova senha será utilizada nos próximos
+            acessos ao sistema.
+          </p>
+
+        </header>
+
+
+        <!-- ==================================
+             MENSAGEM GERAL DO FORMULÁRIO
+        =================================== -->
+
+        <div
+          id="nova-senha-message"
+          class="form-message"
+          role="alert"
+          aria-live="polite"
+          hidden
+        ></div>
+
+
+        <!-- ==================================
+             FORMULÁRIO DE NOVA SENHA
+        =================================== -->
+
+        <form
+          id="nova-senha-form"
+          class="auth-form new-password-form"
+          action="login.html"
+          method="get"
+          novalidate
+        >
+
+          <!-- Nova senha -->
+          <div class="form-group">
+
+            <label for="nova-senha">
+              Nova senha
+            </label>
+
+            <div class="input-wrapper">
+
+              <span
+                class="input-icon"
+                aria-hidden="true"
+              >
+                <svg viewBox="0 0 24 24">
+                  <rect
+                    x="4"
+                    y="10"
+                    width="16"
+                    height="11"
+                    rx="3"
+                  ></rect>
+
+                  <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+                  <path d="M12 14v3"></path>
+                </svg>
+              </span>
+
+              <input
+                id="nova-senha"
+                class="form-control form-control-password"
+                name="novaSenha"
+                type="password"
+                placeholder="Digite sua nova senha"
+                autocomplete="new-password"
+                minlength="8"
+                maxlength="60"
+                aria-describedby="nova-senha-help nova-senha-error"
+                required
+              >
+
+              <!-- Mostrar ou ocultar senha -->
+              <button
+                class="password-toggle"
+                type="button"
+                data-password-target="nova-senha"
+                aria-label="Mostrar nova senha"
+                aria-pressed="false"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M2 12s3.5-7 10-7
+                       10 7 10 7-3.5 7-10 7
+                       S2 12 2 12Z"
+                  ></path>
+
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </button>
+
+            </div>
+
+            <small
+              id="nova-senha-help"
+              class="field-help"
+            >
+              Use pelo menos 8 caracteres, com letra e número.
+            </small>
+
+            <small
+              id="nova-senha-error"
+              class="field-error"
+              aria-live="polite"
+            ></small>
+
+          </div>
+
+
+          <!-- ==================================
+               REQUISITOS DA SENHA
+          =================================== -->
+
+          <div
+            id="password-requirements"
+            class="password-requirements"
+            aria-label="Requisitos da senha"
+          >
+
+            <p>
+              Sua senha deve conter:
+            </p>
+
+            <ul>
+
+              <li
+                id="requirement-length"
+                class="password-requirement"
+              >
+                <span aria-hidden="true">○</span>
+                Pelo menos 8 caracteres
+              </li>
+
+              <li
+                id="requirement-letter"
+                class="password-requirement"
+              >
+                <span aria-hidden="true">○</span>
+                Pelo menos uma letra
+              </li>
+
+              <li
+                id="requirement-number"
+                class="password-requirement"
+              >
+                <span aria-hidden="true">○</span>
+                Pelo menos um número
+              </li>
+
+            </ul>
+
+          </div>
+
+
+          <!-- Confirmar nova senha -->
+          <div class="form-group">
+
+            <label for="confirmar-nova-senha">
+              Confirmar nova senha
+            </label>
+
+            <div class="input-wrapper">
+
+              <span
+                class="input-icon"
+                aria-hidden="true"
+              >
+                <svg viewBox="0 0 24 24">
+                  <rect
+                    x="4"
+                    y="10"
+                    width="16"
+                    height="11"
+                    rx="3"
+                  ></rect>
+
+                  <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+                  <path d="m9 16 2 2 4-4"></path>
+                </svg>
+              </span>
+
+              <input
+                id="confirmar-nova-senha"
+                class="form-control form-control-password"
+                name="confirmarNovaSenha"
+                type="password"
+                placeholder="Digite a senha novamente"
+                autocomplete="new-password"
+                minlength="8"
+                maxlength="60"
+                aria-describedby="confirmar-nova-senha-error"
+                required
+              >
+
+              <!-- Mostrar ou ocultar confirmação -->
+              <button
+                class="password-toggle"
+                type="button"
+                data-password-target="confirmar-nova-senha"
+                aria-label="Mostrar confirmação da senha"
+                aria-pressed="false"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M2 12s3.5-7 10-7
+                       10 7 10 7-3.5 7-10 7
+                       S2 12 2 12Z"
+                  ></path>
+
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </button>
+
+            </div>
+
+            <small
+              id="confirmar-nova-senha-error"
+              class="field-error"
+              aria-live="polite"
+            ></small>
+
+          </div>
+
+
+          <!-- Botão salvar -->
+          <button
+            id="nova-senha-submit"
+            class="primary-button new-password-submit-button"
+            type="submit"
+          >
+
+            <span class="button-label">
+              Salvar nova senha
+            </span>
+
+            <span
+              class="button-arrow"
+              aria-hidden="true"
+            >
+              →
+            </span>
+
+            <span
+              class="button-loading"
+              aria-hidden="true"
+              hidden
+            >
+              <span class="loading-spinner"></span>
+              Salvando...
+            </span>
+
+          </button>
+
+        </form>
+
+
+        <!-- Informação de segurança -->
+        <div class="security-note">
+
+          <span
+            class="security-note-icon"
+            aria-hidden="true"
+          >
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 22s8-4 8-10V5l-8-3-8 3v7
+                   c0 6 8 10 8 10Z"
+              ></path>
+
+              <path d="m9 12 2 2 4-4"></path>
+            </svg>
+          </span>
+
+          <p>
+            Não utilize uma senha fácil de adivinhar
+            ou que já use em outros serviços.
+          </p>
+
+        </div>
+
+
+        <!-- Voltar ao login -->
+        <div class="auth-alternative">
+
+          <span>
+            Deseja cancelar a recuperação?
+          </span>
+
+          <a href="login.html">
+            Voltar para o login
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <!-- Rodapé -->
+      <footer class="auth-footer">
+
+        <p>
+          © 2026 Mercearia do João
+        </p>
+
+        <span aria-hidden="true">•</span>
+
+        <p>
+          Sistema de gestão
+        </p>
+
+      </footer>
+
+    </section>
+
+  </main>
+
+
+  <!-- JAVASCRIPT PRINCIPAL DO SISTEMA -->
+  <script src="js/script.js"></script>
+
+</body>
+</html>

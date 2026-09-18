@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#e7e3dc">
+
+  <meta
+    name="description"
+    content="Cadastro e gestão de clientes da Mercearia do João."
+  >
+
+  <title>Clientes | Mercearia do João</title>
+
+  <link rel="stylesheet" href="./css/style.css">
+  <script src="./js/script.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#conteudo">
+    Pular para o conteúdo
+  </a>
+
+  <main class="app-shell" id="conteudo">
+
+    <!-- ============================================================
+         BARRA LATERAL DO SISTEMA
+         ============================================================ -->
+
+    <aside class="sidebar" aria-label="Menu principal">
+
+      <button
+        class="owner-photo"
+        id="profile-menu-button"
+        type="button"
+        aria-label="Abrir menu do perfil de João"
+        aria-controls="profile-menu"
+        aria-expanded="false"
+      >
+        <img
+          src="./assets/seu-joao.png"
+          width="320"
+          height="320"
+          alt="João, proprietário da mercearia"
+        >
+      </button>
+
+      <div class="profile-menu" id="profile-menu" hidden>
+        <div class="profile-menu-header">
+          <strong>João</strong>
+          <span>Proprietário</span>
+        </div>
+
+        <a class="profile-menu-link" href="#" data-future-feature>
+          Minha conta
+        </a>
+
+        <button
+          class="profile-menu-logout"
+          id="logout-button"
+          type="button"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M10 17l5-5-5-5M15 12H3M15 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4"/>
+          </svg>
+          Sair do sistema
+        </button>
+      </div>
+
+      <nav class="primary-navigation" aria-label="Navegação principal">
+        <a class="navigation-link" href="./index.html">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 13h6V4H4v9Zm10 7h6v-9h-6v9ZM4 20h6v-3H4v3Zm10-13h6V4h-6v3Z"/>
+          </svg>
+          <span>Hoje</span>
+        </a>
+
+        <a class="navigation-link" href="./produtos.html">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m4 7 8-4 8 4-8 4-8-4Zm0 0v10l8 4 8-4V7M12 11v10"/>
+          </svg>
+          <span>Produtos</span>
+        </a>
+
+        <a class="navigation-link" href="./vendas.html">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 19V9m6 10V5m6 14v-7m4 7H2"/>
+          </svg>
+          <span>Vendas</span>
+        </a>
+
+        <a
+          class="navigation-link is-active"
+          href="./clientes.html"
+          aria-current="page"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm6 0 2 2 4-5"/>
+          </svg>
+          <span>Clientes</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button
+          class="notification-button"
+          type="button"
+          aria-label="2 notificações não lidas"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/>
+          </svg>
+          <span class="notification-dot" aria-hidden="true"></span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- ============================================================
+         PÁGINA DE CLIENTES
+         ============================================================ -->
+
+    <section
+      class="dashboard clients-page"
+      aria-labelledby="clients-page-title"
+    >
+
+      <!-- CABEÇALHO DA PÁGINA DE CLIENTES -->
+      <header class="clients-page-header">
+        <div class="clients-page-heading">
+          <p>Relacionamento da mercearia</p>
+          <h1 id="clients-page-title">Clientes</h1>
+          <span>Consulte, cadastre e mantenha os dados dos seus clientes.</span>
+        </div>
+
+        <div class="clients-header-side">
+          <div class="clients-header-status">
+            <span class="update-status">
+              <i aria-hidden="true"></i>
+              Atualizado agora
+            </span>
+
+            <button
+              class="theme-toggle"
+              type="button"
+              aria-label="Ativar modo escuro"
+              aria-pressed="false"
+              title="Alternar tema"
+            >
+              <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="4"/>
+                <path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+              </svg>
+
+              <span class="toggle-track" aria-hidden="true"><i></i></span>
+
+              <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20 15.2A8 8 0 0 1 8.8 4 8.1 8.1 0 1 0 20 15.2Z"/>
+              </svg>
+            </button>
+          </div>
+
+          <button
+            class="new-client-button"
+            id="new-client-button"
+            type="button"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 5v14M5 12h14"/>
+            </svg>
+            <span>Novo cliente</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- LISTA DE CLIENTES -->
+      <section
+        class="glass-card clients-list-panel"
+        aria-labelledby="clients-list-title"
+      >
+        <header class="clients-list-header">
+          <div class="clients-list-heading">
+            <h2 id="clients-list-title">Todos os clientes</h2>
+            <p id="clients-result-description">Carregando clientes…</p>
+          </div>
+
+          <label class="clients-search">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"/>
+              <path d="m20 20-4-4"/>
+            </svg>
+            <span class="visually-hidden">Pesquisar cliente</span>
+            <input
+              id="clients-search-input"
+              type="search"
+              placeholder="Buscar por nome, CPF ou telefone"
+              autocomplete="off"
+            >
+          </label>
+        </header>
+
+        <div
+          class="clients-table-wrapper"
+          tabindex="0"
+          role="region"
+          aria-label="Lista de clientes"
+        >
+          <table class="clients-table">
+            <thead>
+              <tr>
+                <th scope="col">Cliente</th>
+                <th scope="col">CPF</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">Endereço</th>
+                <th scope="col"><span class="visually-hidden">Ações</span></th>
+              </tr>
+            </thead>
+            <tbody id="clients-table-body"></tbody>
+          </table>
+        </div>
+
+        <footer class="clients-list-footer">
+          <p id="clients-results-count">Nenhum cliente encontrado</p>
+          <p>Os dados permanecem salvos neste navegador.</p>
+        </footer>
+      </section>
+    </section>
+
+    <!-- ============================================================
+         MODAL — NOVO, EDITAR E VISUALIZAR CLIENTE
+         ============================================================ -->
+    <div
+      class="client-modal"
+      id="client-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="client-modal-title"
+      hidden
+    >
+      <div class="client-modal-backdrop" data-close-client-modal></div>
+
+      <section class="client-modal-panel">
+        <header class="client-modal-header">
+          <div>
+            <p id="client-modal-eyebrow">Cadastro de cliente</p>
+            <h2 id="client-modal-title">Novo cliente</h2>
+            <span id="client-modal-description">
+              Preencha os dados para incluir um cliente na mercearia.
+            </span>
+          </div>
+
+          <button
+            class="client-modal-close"
+            type="button"
+            aria-label="Fechar janela do cliente"
+            data-close-client-modal
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m6 6 12 12M18 6 6 18"/>
+            </svg>
+          </button>
+        </header>
+
+        <form id="client-form" novalidate>
+          <input id="client-id" type="hidden">
+
+          <div class="client-modal-body">
+            <section class="client-form-section" aria-labelledby="client-data-title">
+              <header>
+                <span>01</span>
+                <div>
+                  <h3 id="client-data-title">Dados do cliente</h3>
+                  <p>Nome e CPF são obrigatórios. Telefone e endereço são opcionais.</p>
+                </div>
+              </header>
+
+              <div class="client-form-grid">
+                <label class="client-form-field client-field-wide">
+                  <span>Nome completo <b>*</b></span>
+                  <input
+                    id="client-name"
+                    type="text"
+                    maxlength="150"
+                    autocomplete="name"
+                    placeholder="Ex.: Carlos Oliveira"
+                    required
+                  >
+                  <small id="client-name-error"></small>
+                </label>
+
+                <label class="client-form-field">
+                  <span>CPF <b>*</b></span>
+                  <input
+                    id="client-cpf"
+                    type="text"
+                    inputmode="numeric"
+                    maxlength="14"
+                    autocomplete="off"
+                    placeholder="000.000.000-00"
+                    required
+                  >
+                  <small id="client-cpf-error"></small>
+                </label>
+
+                <label class="client-form-field">
+                  <span>Telefone</span>
+                  <input
+                    id="client-phone"
+                    type="tel"
+                    inputmode="tel"
+                    maxlength="15"
+                    autocomplete="tel"
+                    placeholder="(44) 99999-9999"
+                  >
+                  <small id="client-phone-error"></small>
+                </label>
+
+                <label class="client-form-field client-field-wide">
+                  <span>Endereço</span>
+                  <textarea
+                    id="client-address"
+                    maxlength="200"
+                    rows="3"
+                    autocomplete="street-address"
+                    placeholder="Rua, número, bairro e complemento"
+                  ></textarea>
+                  <small id="client-address-error"></small>
+                </label>
+              </div>
+            </section>
+          </div>
+
+          <footer class="client-modal-footer">
+            <p class="client-required-note">
+              <b>*</b> Campos obrigatórios
+            </p>
+
+            <div class="client-modal-actions">
+              <button
+                class="client-cancel-button"
+                id="client-cancel-button"
+                type="button"
+                data-close-client-modal
+              >
+                Cancelar
+              </button>
+
+              <button
+                class="client-save-button"
+                id="client-save-button"
+                type="submit"
+              >
+                Salvar cliente
+              </button>
+            </div>
+          </footer>
+        </form>
+      </section>
+    </div>
+
+    <div
+      class="client-toast"
+      id="client-toast"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+  </main>
+</body>
+</html>

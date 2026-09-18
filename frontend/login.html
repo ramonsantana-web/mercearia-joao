@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#e7e3dc">
+
+  <meta
+    name="description"
+    content="Acesso ao sistema de gestão da Mercearia do João."
+  >
+
+  <title>Entrar | Mercearia do João</title>
+
+  <link
+    rel="preload"
+    href="./assets/mercearia-bg.jpg"
+    as="image"
+  >
+
+  <link
+    rel="stylesheet"
+    href="./css/style.css"
+  >
+
+  <script
+    src="./js/script.js"
+    defer
+  ></script>
+</head>
+
+<body class="auth-page login-page">
+
+  <a
+    class="skip-link"
+    href="#conteudo"
+  >
+    Pular para o conteúdo
+  </a>
+
+  <main
+    class="auth-layout login-layout"
+    id="conteudo"
+  >
+
+    <!-- ============================================================
+         LOGIN — ÁREA VISUAL
+         ============================================================ -->
+
+    <section
+      class="auth-visual login-visual"
+      aria-labelledby="login-welcome-title"
+    >
+      <div
+        class="auth-visual-overlay login-visual-overlay"
+        aria-hidden="true"
+      ></div>
+
+      <div class="auth-visual-content login-visual-content">
+
+        <a
+          class="auth-brand login-brand"
+          href="./login.html"
+          aria-label="Mercearia do João — Página de entrada"
+        >
+          <span
+            class="auth-brand-mark login-brand-mark"
+            aria-hidden="true"
+          >
+            MJ
+          </span>
+
+          <span class="auth-brand-copy login-brand-copy">
+            <strong>Mercearia do João</strong>
+            <small>Gestão simples e organizada</small>
+          </span>
+        </a>
+
+        <div class="auth-welcome login-welcome">
+
+          <p class="auth-eyebrow login-eyebrow">
+            Gestão da mercearia
+          </p>
+
+          <h1 id="login-welcome-title">
+            Tudo em ordem,
+            <span>todos os dias.</span>
+          </h1>
+
+          <p>
+            Acompanhe produtos, vendas, clientes e pagamentos
+            em um sistema simples para a rotina da sua mercearia.
+          </p>
+
+        </div>
+
+        <ul
+          class="auth-benefits login-benefits"
+          aria-label="Recursos do sistema"
+        >
+          <li>
+            <span
+              class="auth-benefit-icon login-benefit-icon"
+              aria-hidden="true"
+            >
+              01
+            </span>
+
+            Controle de estoque simplificado
+          </li>
+
+          <li>
+            <span
+              class="auth-benefit-icon login-benefit-icon"
+              aria-hidden="true"
+            >
+              02
+            </span>
+
+            Vendas e pagamentos organizados
+          </li>
+
+          <li>
+            <span
+              class="auth-benefit-icon login-benefit-icon"
+              aria-hidden="true"
+            >
+              03
+            </span>
+
+            Informações importantes em um só lugar
+          </li>
+        </ul>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         LOGIN — ÁREA DO FORMULÁRIO
+         ============================================================ -->
+
+    <section
+      class="auth-form-area login-form-area"
+      aria-labelledby="login-title"
+    >
+
+      <div class="auth-top-actions login-top-actions">
+
+        <!-- BOTÃO DE TEMA CLARO E ESCURO -->
+        <button
+          class="theme-toggle"
+          type="button"
+          aria-label="Ativar modo escuro"
+          aria-pressed="false"
+          title="Alternar tema"
+        >
+          <svg
+            class="theme-toggle-sun sun-icon"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <circle
+              cx="12"
+              cy="12"
+              r="4"
+            ></circle>
+
+            <path
+              d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+            ></path>
+          </svg>
+
+          <span
+            class="theme-toggle-track toggle-track"
+            aria-hidden="true"
+          >
+            <i class="theme-toggle-thumb"></i>
+          </span>
+
+          <svg
+            class="theme-toggle-moon moon-icon"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              d="M20 15.2A8 8 0 0 1 8.8 4 8.1 8.1 0 1 0 20 15.2Z"
+            ></path>
+          </svg>
+        </button>
+
+      </div>
+
+      <div class="auth-card login-card">
+
+        <header class="auth-card-header login-card-header">
+
+          <p class="auth-card-eyebrow login-card-eyebrow">
+            Área administrativa
+          </p>
+
+          <h2 id="login-title">
+            Bem-vindo
+          </h2>
+
+          <p>
+            Informe seu e-mail e sua senha para entrar no sistema.
+          </p>
+
+        </header>
+
+        <!-- MENSAGEM GERAL DO FORMULÁRIO -->
+        <div
+          class="form-message"
+          id="login-message"
+          role="alert"
+          hidden
+        ></div>
+
+        <!-- ========================================================
+             FORMULÁRIO DE LOGIN
+             O envio direciona para o dashboard.
+             ======================================================== -->
+
+        <form
+          class="auth-form login-form"
+          id="login-form"
+          action="./index.html"
+          method="get"
+          novalidate
+        >
+
+          <!-- CAMPO DE E-MAIL -->
+          <div class="form-group">
+
+            <label for="login-email">
+              E-mail
+            </label>
+
+            <div
+              class="input-wrapper"
+              id="login-email-wrapper"
+            >
+              <span
+                class="input-icon"
+                aria-hidden="true"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M4 5h16v14H4V5Zm0 2 8 6 8-6"
+                  ></path>
+                </svg>
+              </span>
+
+              <input
+                class="form-control"
+                id="login-email"
+                name="email"
+                type="email"
+                inputmode="email"
+                autocomplete="email"
+                placeholder="joao@mercearia.com"
+                aria-describedby="login-email-error"
+                required
+              >
+            </div>
+
+            <small
+              class="field-error"
+              id="login-email-error"
+              aria-live="polite"
+            ></small>
+
+          </div>
+
+          <!-- CAMPO DE SENHA -->
+          <div class="form-group">
+
+            <div class="label-row">
+
+              <label for="login-password">
+                Senha
+              </label>
+
+              <a
+                class="forgot-password-link"
+                href="./recuperar-senha.html"
+              >
+                Esqueci minha senha
+              </a>
+
+            </div>
+
+            <div
+              class="input-wrapper"
+              id="login-password-wrapper"
+            >
+              <span
+                class="input-icon"
+                aria-hidden="true"
+              >
+                <svg viewBox="0 0 24 24">
+                  <rect
+                    x="4"
+                    y="10"
+                    width="16"
+                    height="11"
+                    rx="2"
+                  ></rect>
+
+                  <path
+                    d="M8 10V7a4 4 0 0 1 8 0v3"
+                  ></path>
+                </svg>
+              </span>
+
+              <input
+                class="form-control form-control-password"
+                id="login-password"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                placeholder="Digite sua senha"
+                minlength="6"
+                aria-describedby="login-password-error"
+                required
+              >
+
+              <button
+                class="password-toggle"
+                id="login-password-toggle"
+                type="button"
+                aria-label="Mostrar senha"
+                aria-controls="login-password"
+                aria-pressed="false"
+                title="Mostrar senha"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"
+                  ></path>
+
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="2.5"
+                  ></circle>
+                </svg>
+              </button>
+            </div>
+
+            <small
+              class="field-error"
+              id="login-password-error"
+              aria-live="polite"
+            ></small>
+
+          </div>
+
+          <!-- OPÇÃO LEMBRAR ACESSO -->
+          <label class="checkbox-field">
+
+            <input
+              id="remember-login"
+              name="remember"
+              type="checkbox"
+            >
+
+            <span
+              class="custom-checkbox"
+              aria-hidden="true"
+            >
+              <svg viewBox="0 0 16 16">
+                <path d="m3 8 3 3 7-7"></path>
+              </svg>
+            </span>
+
+            <span>
+              Lembrar meu acesso neste dispositivo
+            </span>
+
+          </label>
+
+          <!-- BOTÃO ENTRAR -->
+          <button
+            class="primary-button"
+            id="login-submit-button"
+            type="submit"
+          >
+            <span>Entrar no sistema</span>
+
+            <svg
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14"></path>
+              <path d="m14 7 5 5-5 5"></path>
+            </svg>
+          </button>
+
+        </form>
+
+        <!-- AVISO DE SEGURANÇA -->
+        <div class="security-note">
+
+          <span
+            class="security-note-icon"
+            aria-hidden="true"
+          >
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 3 5 6v5c0 5 3 8 7 10 4-2 7-5 7-10V6l-7-3Z"
+              ></path>
+
+              <path d="m9 12 2 2 4-4"></path>
+            </svg>
+          </span>
+
+          <p>
+            Seus dados de acesso são utilizados somente para
+            proteger as informações da mercearia.
+          </p>
+
+        </div>
+
+        <!-- LINK PARA CRIAR CONTA -->
+        <div class="auth-alternative login-create-account">
+
+          <span>
+            Ainda não possui uma conta?
+          </span>
+
+          <a href="./cadastro.html">
+            Criar conta
+          </a>
+
+        </div>
+
+      </div>
+
+      <footer class="auth-footer login-footer">
+
+        <p>
+          © 2026 Mercearia do João
+        </p>
+
+        <span aria-hidden="true">•</span>
+
+        <p>
+          Sistema de gestão
+        </p>
+
+      </footer>
+
+    </section>
+
+  </main>
+</body>
+</html>

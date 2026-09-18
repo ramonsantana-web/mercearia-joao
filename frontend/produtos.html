@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="light">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
 
@@ -18,12 +18,6 @@
 
   <title>Produtos | Mercearia do João</title>
 
-  <link
-    rel="preload"
-    href="./assets/mercearia-bg.jpg"
-    as="image"
-  >
-
   <link rel="stylesheet" href="./css/style.css">
 
   <script src="./js/script.js" defer></script>
@@ -36,13 +30,20 @@
 
   <main class="app-shell" id="conteudo">
 
-    <!-- BARRA LATERAL -->
+    <!-- ============================================================
+         BARRA LATERAL DO SISTEMA
+         ============================================================ -->
+
     <aside class="sidebar" aria-label="Menu principal">
 
-      <a
+      <!-- FOTO E MENU DO PERFIL -->
+      <button
         class="owner-photo"
-        href="#"
-        aria-label="Perfil de João"
+        id="profile-menu-button"
+        type="button"
+        aria-label="Abrir menu do perfil de João"
+        aria-controls="profile-menu"
+        aria-expanded="false"
       >
         <img
           src="./assets/seu-joao.png"
@@ -50,13 +51,44 @@
           height="320"
           alt="João, proprietário da mercearia"
         >
-      </a>
+      </button>
 
+      <div
+        class="profile-menu"
+        id="profile-menu"
+        hidden
+      >
+        <div class="profile-menu-header">
+          <strong>João</strong>
+          <span>Proprietário</span>
+        </div>
+
+        <a
+          class="profile-menu-link"
+          href="#"
+          data-future-feature
+        >
+          Minha conta
+        </a>
+
+        <button
+          class="profile-menu-logout"
+          id="logout-button"
+          type="button"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M10 17l5-5-5-5M15 12H3M15 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4"/>
+          </svg>
+
+          Sair do sistema
+        </button>
+      </div>
+
+      <!-- NAVEGAÇÃO PRINCIPAL -->
       <nav
         class="primary-navigation"
         aria-label="Navegação principal"
       >
-
         <a
           class="navigation-link"
           href="./index.html"
@@ -80,7 +112,10 @@
           <span>Produtos</span>
         </a>
 
-        <a class="navigation-link" href="#">
+        <a
+          class="navigation-link"
+          href="./vendas.html"
+        >
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M4 19V9m6 10V5m6 14v-7m4 7H2"/>
           </svg>
@@ -88,18 +123,19 @@
           <span>Vendas</span>
         </a>
 
-        <a class="navigation-link" href="#">
+        <a
+          class="navigation-link"
+          href="./clientes.html"
+        >
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm6 0 2 2 4-5"/>
           </svg>
 
           <span>Clientes</span>
         </a>
-
       </nav>
 
       <div class="sidebar-footer">
-
         <button
           class="notification-button"
           type="button"
@@ -114,15 +150,13 @@
             aria-hidden="true"
           ></span>
         </button>
-
-        <span class="owner-initials" aria-hidden="true">
-          JS
-        </span>
-
       </div>
     </aside>
 
-    <!-- CONTEÚDO -->
+    <!-- ============================================================
+         PÁGINA DE PRODUTOS
+         ============================================================ -->
+
     <section
       class="dashboard products-page"
       aria-labelledby="products-title"
@@ -163,11 +197,13 @@
               aria-hidden="true"
             >
               <circle cx="12" cy="12" r="4"/>
-
               <path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
             </svg>
 
-            <span class="toggle-track" aria-hidden="true">
+            <span
+              class="toggle-track"
+              aria-hidden="true"
+            >
               <i></i>
             </span>
 
@@ -179,64 +215,78 @@
               <path d="M20 15.2A8 8 0 0 1 8.8 4 8.1 8.1 0 1 0 20 15.2Z"/>
             </svg>
           </button>
-
         </div>
       </header>
 
-      <!-- INDICADORES -->
+      <!-- ==========================================================
+           INDICADORES DO ESTOQUE
+           ========================================================== -->
+
       <section
         class="product-metrics"
         aria-label="Indicadores do estoque"
       >
 
-        <article class="glass-card product-metric">
-
-          <div class="product-metric-icon metric-blue">
+        <button
+          class="glass-card product-metric product-metric-button is-selected"
+          type="button"
+          data-product-status-shortcut="all"
+          aria-pressed="true"
+          aria-label="Mostrar todos os produtos"
+        >
+          <span class="product-metric-icon metric-blue">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="m4 7 8-4 8 4-8 4-8-4Zm0 0v10l8 4 8-4V7M12 11v10"/>
             </svg>
-          </div>
+          </span>
 
-          <div>
+          <span class="product-metric-content">
             <span>Total de produtos</span>
             <strong id="metric-total-products">10</strong>
             <small>produtos cadastrados</small>
-          </div>
+          </span>
+        </button>
 
-        </article>
-
-        <article class="glass-card product-metric">
-
-          <div class="product-metric-icon metric-orange">
+        <button
+          class="glass-card product-metric product-metric-button"
+          type="button"
+          data-product-status-shortcut="low"
+          aria-pressed="false"
+          aria-label="Mostrar produtos com estoque baixo"
+        >
+          <span class="product-metric-icon metric-orange">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M12 8v5m0 3h.01M10.3 3.8 2.6 17.2A2 2 0 0 0 4.3 20h15.4a2 2 0 0 0 1.7-2.8L13.7 3.8a2 2 0 0 0-3.4 0Z"/>
             </svg>
-          </div>
+          </span>
 
-          <div>
+          <span class="product-metric-content">
             <span>Estoque baixo</span>
             <strong id="metric-low-products">3</strong>
             <small>precisam de reposição</small>
-          </div>
+          </span>
+        </button>
 
-        </article>
-
-        <article class="glass-card product-metric">
-
-          <div class="product-metric-icon metric-red">
+        <button
+          class="glass-card product-metric product-metric-button"
+          type="button"
+          data-product-status-shortcut="empty"
+          aria-pressed="false"
+          aria-label="Mostrar produtos sem estoque"
+        >
+          <span class="product-metric-icon metric-red">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <circle cx="12" cy="12" r="9"/>
               <path d="m9 9 6 6m0-6-6 6"/>
             </svg>
-          </div>
+          </span>
 
-          <div>
+          <span class="product-metric-content">
             <span>Sem estoque</span>
             <strong id="metric-empty-products">2</strong>
             <small>produtos indisponíveis</small>
-          </div>
-
-        </article>
+          </span>
+        </button>
 
         <article class="glass-card product-metric">
 
@@ -249,7 +299,10 @@
           <div>
             <span>Valor em estoque</span>
 
-            <strong class="inventory-value">
+            <strong
+              class="inventory-value"
+              id="metric-inventory-value"
+            >
               <small>R$</small> 8.420
             </strong>
 
@@ -257,10 +310,12 @@
           </div>
 
         </article>
-
       </section>
 
-      <!-- LISTA DE PRODUTOS -->
+      <!-- ==========================================================
+           LISTA DE PRODUTOS
+           ========================================================== -->
+
       <section
         class="glass-card products-panel"
         aria-labelledby="products-list-title"
@@ -278,16 +333,17 @@
             </p>
           </div>
 
-          <button
+          <a
             class="new-product-button"
-            type="button"
+            id="new-product-button"
+            href="./cadastro-produto.html"
           >
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M12 5v14M5 12h14"/>
             </svg>
 
             <span>Novo produto</span>
-          </button>
+          </a>
 
         </header>
 
@@ -311,14 +367,12 @@
               placeholder="Buscar por nome ou código"
               autocomplete="off"
             >
-
           </label>
 
           <div
             class="product-filters"
             aria-label="Filtrar pela situação do estoque"
           >
-
             <button
               class="filter-button is-selected"
               type="button"
@@ -348,7 +402,6 @@
               Sem estoque
               <span id="empty-products-count">2</span>
             </button>
-
           </div>
 
           <label class="category-filter">
@@ -369,19 +422,16 @@
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="m8 10 4 4 4-4"/>
             </svg>
-
           </label>
-
         </div>
 
-        <!-- TABELA -->
+        <!-- TABELA DE PRODUTOS -->
         <div
           class="products-table-wrapper"
           tabindex="0"
           role="region"
           aria-label="Lista de produtos"
         >
-
           <table class="products-table">
 
             <thead>
@@ -391,7 +441,6 @@
                 <th scope="col">Estoque</th>
                 <th scope="col">Preço</th>
                 <th scope="col">Situação</th>
-
                 <th scope="col">
                   <span class="visually-hidden">
                     Ações
@@ -402,26 +451,27 @@
 
             <tbody id="products-table-body">
 
-              <!-- ARROZ -->
+              <!-- PRODUTO 1 -->
               <tr
                 class="product-row"
+                data-product-id="1"
                 data-name="arroz camil 5 kg"
                 data-code="7896006711114"
                 data-category="alimentos"
                 data-status="available"
+                data-stock="18"
+                data-minimum-stock="5"
+                data-price="29.90"
+                data-cost="23.50"
               >
                 <th scope="row">
                   <div class="product-cell">
-
-                    <div class="product-thumbnail product-rice">
-                      <span aria-hidden="true">A</span>
-                    </div>
+                    <span class="product-thumbnail product-rice">A</span>
 
                     <div>
                       <strong>Arroz Camil 5 kg</strong>
                       <small>Cód. 7896006711114</small>
                     </div>
-
                   </div>
                 </th>
 
@@ -443,49 +493,87 @@
                 </td>
 
                 <td>
-                  <button
-                    class="product-menu-button"
-                    type="button"
-                    aria-label="Abrir opções do Arroz Camil"
-                  >
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <circle cx="5" cy="12" r="1"/>
-                      <circle cx="12" cy="12" r="1"/>
-                      <circle cx="19" cy="12" r="1"/>
-                    </svg>
-                  </button>
+                  <div class="product-actions">
+                    <button
+                      class="product-menu-button"
+                      type="button"
+                      aria-label="Abrir opções do Arroz Camil 5 kg"
+                      aria-controls="product-menu-1"
+                      aria-expanded="false"
+                    >
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="5" cy="12" r="1"/>
+                        <circle cx="12" cy="12" r="1"/>
+                        <circle cx="19" cy="12" r="1"/>
+                      </svg>
+                    </button>
+
+                    <div
+                      class="product-actions-menu"
+                      id="product-menu-1"
+                      hidden
+                    >
+                      <button
+                        type="button"
+                        data-product-action="view"
+                        data-product-id="1"
+                      >
+                        Visualizar
+                      </button>
+
+                      <a href="./cadastro-produto.html?id=1">
+                        Editar
+                      </a>
+
+                      <button
+                        type="button"
+                        data-product-action="stock"
+                        data-product-id="1"
+                      >
+                        Ajustar estoque
+                      </button>
+
+                      <button
+                        class="danger-action"
+                        type="button"
+                        data-product-action="delete"
+                        data-product-id="1"
+                      >
+                        Excluir
+                      </button>
+                    </div>
+                  </div>
                 </td>
               </tr>
 
-              <!-- LEITE -->
+              <!-- PRODUTO 2 -->
               <tr
                 class="product-row"
+                data-product-id="2"
                 data-name="leite integral 1 litro"
                 data-code="7891000100100"
                 data-category="bebidas"
                 data-status="low"
+                data-stock="4"
+                data-minimum-stock="5"
+                data-price="5.49"
+                data-cost="4.20"
               >
                 <th scope="row">
                   <div class="product-cell">
-
-                    <div class="product-thumbnail product-milk">
-                      <span aria-hidden="true">L</span>
-                    </div>
+                    <span class="product-thumbnail product-milk">L</span>
 
                     <div>
                       <strong>Leite Integral 1 L</strong>
                       <small>Cód. 7891000100100</small>
                     </div>
-
                   </div>
                 </th>
 
                 <td data-label="Categoria">Bebidas</td>
 
                 <td data-label="Estoque">
-                  <strong class="stock-number stock-low">
-                    4 un.
-                  </strong>
+                  <strong class="stock-number stock-low">4 un.</strong>
                 </td>
 
                 <td data-label="Preço">
@@ -500,49 +588,87 @@
                 </td>
 
                 <td>
-                  <button
-                    class="product-menu-button"
-                    type="button"
-                    aria-label="Abrir opções do Leite Integral"
-                  >
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <circle cx="5" cy="12" r="1"/>
-                      <circle cx="12" cy="12" r="1"/>
-                      <circle cx="19" cy="12" r="1"/>
-                    </svg>
-                  </button>
+                  <div class="product-actions">
+                    <button
+                      class="product-menu-button"
+                      type="button"
+                      aria-label="Abrir opções do Leite Integral 1 L"
+                      aria-controls="product-menu-2"
+                      aria-expanded="false"
+                    >
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="5" cy="12" r="1"/>
+                        <circle cx="12" cy="12" r="1"/>
+                        <circle cx="19" cy="12" r="1"/>
+                      </svg>
+                    </button>
+
+                    <div
+                      class="product-actions-menu"
+                      id="product-menu-2"
+                      hidden
+                    >
+                      <button
+                        type="button"
+                        data-product-action="view"
+                        data-product-id="2"
+                      >
+                        Visualizar
+                      </button>
+
+                      <a href="./cadastro-produto.html?id=2">
+                        Editar
+                      </a>
+
+                      <button
+                        type="button"
+                        data-product-action="stock"
+                        data-product-id="2"
+                      >
+                        Ajustar estoque
+                      </button>
+
+                      <button
+                        class="danger-action"
+                        type="button"
+                        data-product-action="delete"
+                        data-product-id="2"
+                      >
+                        Excluir
+                      </button>
+                    </div>
+                  </div>
                 </td>
               </tr>
 
-              <!-- CAFÉ -->
+              <!-- PRODUTO 3 -->
               <tr
                 class="product-row"
+                data-product-id="3"
                 data-name="cafe pilao 500 gramas"
                 data-code="7896089011118"
                 data-category="alimentos"
                 data-status="empty"
+                data-stock="0"
+                data-minimum-stock="4"
+                data-price="18.90"
+                data-cost="14.80"
               >
                 <th scope="row">
                   <div class="product-cell">
-
-                    <div class="product-thumbnail product-coffee">
-                      <span aria-hidden="true">C</span>
-                    </div>
+                    <span class="product-thumbnail product-coffee">C</span>
 
                     <div>
                       <strong>Café Pilão 500 g</strong>
                       <small>Cód. 7896089011118</small>
                     </div>
-
                   </div>
                 </th>
 
                 <td data-label="Categoria">Alimentos</td>
 
                 <td data-label="Estoque">
-                  <strong class="stock-number stock-empty">
-                    0 un.
-                  </strong>
+                  <strong class="stock-number stock-empty">0 un.</strong>
                 </td>
 
                 <td data-label="Preço">
@@ -557,51 +683,91 @@
                 </td>
 
                 <td>
-                  <button
-                    class="product-menu-button"
-                    type="button"
-                    aria-label="Abrir opções do Café Pilão"
-                  >
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <circle cx="5" cy="12" r="1"/>
-                      <circle cx="12" cy="12" r="1"/>
-                      <circle cx="19" cy="12" r="1"/>
-                    </svg>
-                  </button>
+                  <div class="product-actions">
+                    <button
+                      class="product-menu-button"
+                      type="button"
+                      aria-label="Abrir opções do Café Pilão 500 g"
+                      aria-controls="product-menu-3"
+                      aria-expanded="false"
+                    >
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="5" cy="12" r="1"/>
+                        <circle cx="12" cy="12" r="1"/>
+                        <circle cx="19" cy="12" r="1"/>
+                      </svg>
+                    </button>
+
+                    <div
+                      class="product-actions-menu"
+                      id="product-menu-3"
+                      hidden
+                    >
+                      <button
+                        type="button"
+                        data-product-action="view"
+                        data-product-id="3"
+                      >
+                        Visualizar
+                      </button>
+
+                      <a href="./cadastro-produto.html?id=3">
+                        Editar
+                      </a>
+
+                      <button
+                        type="button"
+                        data-product-action="stock"
+                        data-product-id="3"
+                      >
+                        Ajustar estoque
+                      </button>
+
+                      <button
+                        class="danger-action"
+                        type="button"
+                        data-product-action="delete"
+                        data-product-id="3"
+                      >
+                        Excluir
+                      </button>
+                    </div>
+                  </div>
                 </td>
               </tr>
 
-              <!-- AÇÚCAR -->
+              <!-- PRODUTO 4 -->
               <tr
                 class="product-row"
+                data-product-id="4"
                 data-name="acucar uniao 1 kg"
                 data-code="7891910000194"
                 data-category="alimentos"
                 data-status="available"
+                data-stock="22"
+                data-minimum-stock="5"
+                data-price="4.99"
+                data-cost="3.70"
               >
                 <th scope="row">
                   <div class="product-cell">
-
-                    <div class="product-thumbnail product-sugar">
-                      <span aria-hidden="true">A</span>
-                    </div>
+                    <span class="product-thumbnail product-sugar">A</span>
 
                     <div>
                       <strong>Açúcar União 1 kg</strong>
                       <small>Cód. 7891910000194</small>
                     </div>
-
                   </div>
                 </th>
 
                 <td data-label="Categoria">Alimentos</td>
 
                 <td data-label="Estoque">
-                  <strong class="stock-number">24 un.</strong>
+                  <strong class="stock-number">22 un.</strong>
                 </td>
 
                 <td data-label="Preço">
-                  <strong class="product-price">R$ 5,99</strong>
+                  <strong class="product-price">R$ 4,99</strong>
                 </td>
 
                 <td data-label="Situação">
@@ -612,51 +778,83 @@
                 </td>
 
                 <td>
-                  <button
-                    class="product-menu-button"
-                    type="button"
-                    aria-label="Abrir opções do Açúcar União"
-                  >
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <circle cx="5" cy="12" r="1"/>
-                      <circle cx="12" cy="12" r="1"/>
-                      <circle cx="19" cy="12" r="1"/>
-                    </svg>
-                  </button>
+                  <div class="product-actions">
+                    <button
+                      class="product-menu-button"
+                      type="button"
+                      aria-label="Abrir opções do Açúcar União 1 kg"
+                      aria-controls="product-menu-4"
+                      aria-expanded="false"
+                    >
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="5" cy="12" r="1"/>
+                        <circle cx="12" cy="12" r="1"/>
+                        <circle cx="19" cy="12" r="1"/>
+                      </svg>
+                    </button>
+
+                    <div
+                      class="product-actions-menu"
+                      id="product-menu-4"
+                      hidden
+                    >
+                      <button type="button" data-product-action="view" data-product-id="4">
+                        Visualizar
+                      </button>
+
+                      <a href="./cadastro-produto.html?id=4">
+                        Editar
+                      </a>
+
+                      <button type="button" data-product-action="stock" data-product-id="4">
+                        Ajustar estoque
+                      </button>
+
+                      <button
+                        class="danger-action"
+                        type="button"
+                        data-product-action="delete"
+                        data-product-id="4"
+                      >
+                        Excluir
+                      </button>
+                    </div>
+                  </div>
                 </td>
               </tr>
 
-              <!-- DETERGENTE -->
+              <!-- PRODUTO 5 -->
               <tr
                 class="product-row"
+                data-product-id="5"
                 data-name="detergente ype 500 ml"
                 data-code="7896098900205"
                 data-category="limpeza"
                 data-status="available"
+                data-stock="14"
+                data-minimum-stock="5"
+                data-price="2.89"
+                data-cost="1.90"
               >
                 <th scope="row">
                   <div class="product-cell">
-
-                    <div class="product-thumbnail product-cleaning">
-                      <span aria-hidden="true">D</span>
-                    </div>
+                    <span class="product-thumbnail product-cleaning">D</span>
 
                     <div>
                       <strong>Detergente Ypê 500 ml</strong>
                       <small>Cód. 7896098900205</small>
                     </div>
-
                   </div>
                 </th>
 
                 <td data-label="Categoria">Limpeza</td>
 
                 <td data-label="Estoque">
-                  <strong class="stock-number">16 un.</strong>
+                  <strong class="stock-number">14 un.</strong>
                 </td>
 
                 <td data-label="Preço">
-                  <strong class="product-price">R$ 2,79</strong>
+                  <strong class="product-price">R$ 2,89</strong>
                 </td>
 
                 <td data-label="Situação">
@@ -667,49 +865,79 @@
                 </td>
 
                 <td>
-                  <button
-                    class="product-menu-button"
-                    type="button"
-                    aria-label="Abrir opções do Detergente Ypê"
-                  >
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <circle cx="5" cy="12" r="1"/>
-                      <circle cx="12" cy="12" r="1"/>
-                      <circle cx="19" cy="12" r="1"/>
-                    </svg>
-                  </button>
+                  <div class="product-actions">
+                    <button
+                      class="product-menu-button"
+                      type="button"
+                      aria-label="Abrir opções do Detergente Ypê 500 ml"
+                      aria-controls="product-menu-5"
+                      aria-expanded="false"
+                    >
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="5" cy="12" r="1"/>
+                        <circle cx="12" cy="12" r="1"/>
+                        <circle cx="19" cy="12" r="1"/>
+                      </svg>
+                    </button>
+
+                    <div
+                      class="product-actions-menu"
+                      id="product-menu-5"
+                      hidden
+                    >
+                      <button type="button" data-product-action="view" data-product-id="5">
+                        Visualizar
+                      </button>
+
+                      <a href="./cadastro-produto.html?id=5">
+                        Editar
+                      </a>
+
+                      <button type="button" data-product-action="stock" data-product-id="5">
+                        Ajustar estoque
+                      </button>
+
+                      <button
+                        class="danger-action"
+                        type="button"
+                        data-product-action="delete"
+                        data-product-id="5"
+                      >
+                        Excluir
+                      </button>
+                    </div>
+                  </div>
                 </td>
               </tr>
 
-              <!-- FEIJÃO -->
+              <!-- PRODUTO 6 -->
               <tr
                 class="product-row"
+                data-product-id="6"
                 data-name="feijao carioca 1 kg"
                 data-code="7896006744112"
                 data-category="alimentos"
                 data-status="low"
+                data-stock="3"
+                data-minimum-stock="5"
+                data-price="8.49"
+                data-cost="6.30"
               >
                 <th scope="row">
                   <div class="product-cell">
-
-                    <div class="product-thumbnail product-beans">
-                      <span aria-hidden="true">F</span>
-                    </div>
+                    <span class="product-thumbnail product-beans">F</span>
 
                     <div>
                       <strong>Feijão Carioca 1 kg</strong>
                       <small>Cód. 7896006744112</small>
                     </div>
-
                   </div>
                 </th>
 
                 <td data-label="Categoria">Alimentos</td>
 
                 <td data-label="Estoque">
-                  <strong class="stock-number stock-low">
-                    3 un.
-                  </strong>
+                  <strong class="stock-number stock-low">3 un.</strong>
                 </td>
 
                 <td data-label="Preço">
@@ -724,40 +952,72 @@
                 </td>
 
                 <td>
-                  <button
-                    class="product-menu-button"
-                    type="button"
-                    aria-label="Abrir opções do Feijão Carioca"
-                  >
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <circle cx="5" cy="12" r="1"/>
-                      <circle cx="12" cy="12" r="1"/>
-                      <circle cx="19" cy="12" r="1"/>
-                    </svg>
-                  </button>
+                  <div class="product-actions">
+                    <button
+                      class="product-menu-button"
+                      type="button"
+                      aria-label="Abrir opções do Feijão Carioca 1 kg"
+                      aria-controls="product-menu-6"
+                      aria-expanded="false"
+                    >
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="5" cy="12" r="1"/>
+                        <circle cx="12" cy="12" r="1"/>
+                        <circle cx="19" cy="12" r="1"/>
+                      </svg>
+                    </button>
+
+                    <div
+                      class="product-actions-menu"
+                      id="product-menu-6"
+                      hidden
+                    >
+                      <button type="button" data-product-action="view" data-product-id="6">
+                        Visualizar
+                      </button>
+
+                      <a href="./cadastro-produto.html?id=6">
+                        Editar
+                      </a>
+
+                      <button type="button" data-product-action="stock" data-product-id="6">
+                        Ajustar estoque
+                      </button>
+
+                      <button
+                        class="danger-action"
+                        type="button"
+                        data-product-action="delete"
+                        data-product-id="6"
+                      >
+                        Excluir
+                      </button>
+                    </div>
+                  </div>
                 </td>
               </tr>
 
-              <!-- REFRIGERANTE -->
+              <!-- PRODUTO 7 -->
               <tr
                 class="product-row"
+                data-product-id="7"
                 data-name="refrigerante coca cola 2 litros"
                 data-code="7894900011517"
                 data-category="bebidas"
                 data-status="available"
+                data-stock="12"
+                data-minimum-stock="5"
+                data-price="10.99"
+                data-cost="8.20"
               >
                 <th scope="row">
                   <div class="product-cell">
-
-                    <div class="product-thumbnail product-coffee">
-                      <span aria-hidden="true">R</span>
-                    </div>
+                    <span class="product-thumbnail product-coffee">R</span>
 
                     <div>
                       <strong>Refrigerante Coca-Cola 2 L</strong>
                       <small>Cód. 7894900011517</small>
                     </div>
-
                   </div>
                 </th>
 
@@ -779,49 +1039,68 @@
                 </td>
 
                 <td>
-                  <button
-                    class="product-menu-button"
-                    type="button"
-                    aria-label="Abrir opções do Refrigerante"
-                  >
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <circle cx="5" cy="12" r="1"/>
-                      <circle cx="12" cy="12" r="1"/>
-                      <circle cx="19" cy="12" r="1"/>
-                    </svg>
-                  </button>
+                  <div class="product-actions">
+                    <button
+                      class="product-menu-button"
+                      type="button"
+                      aria-label="Abrir opções do Refrigerante Coca-Cola 2 L"
+                      aria-controls="product-menu-7"
+                      aria-expanded="false"
+                    >
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="5" cy="12" r="1"/>
+                        <circle cx="12" cy="12" r="1"/>
+                        <circle cx="19" cy="12" r="1"/>
+                      </svg>
+                    </button>
+
+                    <div class="product-actions-menu" id="product-menu-7" hidden>
+                      <button type="button" data-product-action="view" data-product-id="7">
+                        Visualizar
+                      </button>
+
+                      <a href="./cadastro-produto.html?id=7">Editar</a>
+
+                      <button type="button" data-product-action="stock" data-product-id="7">
+                        Ajustar estoque
+                      </button>
+
+                      <button class="danger-action" type="button" data-product-action="delete" data-product-id="7">
+                        Excluir
+                      </button>
+                    </div>
+                  </div>
                 </td>
               </tr>
 
-              <!-- SABONETE -->
+              <!-- PRODUTO 8 -->
               <tr
                 class="product-row"
+                data-product-id="8"
                 data-name="sabonete dove 90 gramas"
                 data-code="7891037000015"
                 data-category="higiene"
                 data-status="empty"
+                data-stock="0"
+                data-minimum-stock="5"
+                data-price="4.89"
+                data-cost="3.40"
               >
                 <th scope="row">
                   <div class="product-cell">
-
-                    <div class="product-thumbnail product-milk">
-                      <span aria-hidden="true">S</span>
-                    </div>
+                    <span class="product-thumbnail product-milk">S</span>
 
                     <div>
                       <strong>Sabonete Dove 90 g</strong>
                       <small>Cód. 7891037000015</small>
                     </div>
-
                   </div>
                 </th>
 
                 <td data-label="Categoria">Higiene</td>
 
                 <td data-label="Estoque">
-                  <strong class="stock-number stock-empty">
-                    0 un.
-                  </strong>
+                  <strong class="stock-number stock-empty">0 un.</strong>
                 </td>
 
                 <td data-label="Preço">
@@ -836,49 +1115,68 @@
                 </td>
 
                 <td>
-                  <button
-                    class="product-menu-button"
-                    type="button"
-                    aria-label="Abrir opções do Sabonete Dove"
-                  >
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <circle cx="5" cy="12" r="1"/>
-                      <circle cx="12" cy="12" r="1"/>
-                      <circle cx="19" cy="12" r="1"/>
-                    </svg>
-                  </button>
+                  <div class="product-actions">
+                    <button
+                      class="product-menu-button"
+                      type="button"
+                      aria-label="Abrir opções do Sabonete Dove 90 g"
+                      aria-controls="product-menu-8"
+                      aria-expanded="false"
+                    >
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="5" cy="12" r="1"/>
+                        <circle cx="12" cy="12" r="1"/>
+                        <circle cx="19" cy="12" r="1"/>
+                      </svg>
+                    </button>
+
+                    <div class="product-actions-menu" id="product-menu-8" hidden>
+                      <button type="button" data-product-action="view" data-product-id="8">
+                        Visualizar
+                      </button>
+
+                      <a href="./cadastro-produto.html?id=8">Editar</a>
+
+                      <button type="button" data-product-action="stock" data-product-id="8">
+                        Ajustar estoque
+                      </button>
+
+                      <button class="danger-action" type="button" data-product-action="delete" data-product-id="8">
+                        Excluir
+                      </button>
+                    </div>
+                  </div>
                 </td>
               </tr>
 
-              <!-- PÃO -->
+              <!-- PRODUTO 9 -->
               <tr
                 class="product-row"
+                data-product-id="9"
                 data-name="pao frances unidade"
                 data-code="2000000000012"
                 data-category="padaria"
                 data-status="low"
+                data-stock="5"
+                data-minimum-stock="5"
+                data-price="1.00"
+                data-cost="0.55"
               >
                 <th scope="row">
                   <div class="product-cell">
-
-                    <div class="product-thumbnail product-rice">
-                      <span aria-hidden="true">P</span>
-                    </div>
+                    <span class="product-thumbnail product-rice">P</span>
 
                     <div>
                       <strong>Pão francês</strong>
                       <small>Cód. 2000000000012</small>
                     </div>
-
                   </div>
                 </th>
 
                 <td data-label="Categoria">Padaria</td>
 
                 <td data-label="Estoque">
-                  <strong class="stock-number stock-low">
-                    5 un.
-                  </strong>
+                  <strong class="stock-number stock-low">5 un.</strong>
                 </td>
 
                 <td data-label="Preço">
@@ -893,47 +1191,68 @@
                 </td>
 
                 <td>
-                  <button
-                    class="product-menu-button"
-                    type="button"
-                    aria-label="Abrir opções do Pão francês"
-                  >
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <circle cx="5" cy="12" r="1"/>
-                      <circle cx="12" cy="12" r="1"/>
-                      <circle cx="19" cy="12" r="1"/>
-                    </svg>
-                  </button>
+                  <div class="product-actions">
+                    <button
+                      class="product-menu-button"
+                      type="button"
+                      aria-label="Abrir opções do Pão francês"
+                      aria-controls="product-menu-9"
+                      aria-expanded="false"
+                    >
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="5" cy="12" r="1"/>
+                        <circle cx="12" cy="12" r="1"/>
+                        <circle cx="19" cy="12" r="1"/>
+                      </svg>
+                    </button>
+
+                    <div class="product-actions-menu" id="product-menu-9" hidden>
+                      <button type="button" data-product-action="view" data-product-id="9">
+                        Visualizar
+                      </button>
+
+                      <a href="./cadastro-produto.html?id=9">Editar</a>
+
+                      <button type="button" data-product-action="stock" data-product-id="9">
+                        Ajustar estoque
+                      </button>
+
+                      <button class="danger-action" type="button" data-product-action="delete" data-product-id="9">
+                        Excluir
+                      </button>
+                    </div>
+                  </div>
                 </td>
               </tr>
 
-              <!-- ÓLEO -->
+              <!-- PRODUTO 10 -->
               <tr
                 class="product-row"
+                data-product-id="10"
                 data-name="oleo de soja liza 900 ml"
                 data-code="7896036090241"
                 data-category="alimentos"
                 data-status="available"
+                data-stock="16"
+                data-minimum-stock="5"
+                data-price="7.69"
+                data-cost="5.80"
               >
                 <th scope="row">
                   <div class="product-cell">
-
-                    <div class="product-thumbnail product-sugar">
-                      <span aria-hidden="true">O</span>
-                    </div>
+                    <span class="product-thumbnail product-sugar">O</span>
 
                     <div>
                       <strong>Óleo de soja Liza 900 ml</strong>
                       <small>Cód. 7896036090241</small>
                     </div>
-
                   </div>
                 </th>
 
                 <td data-label="Categoria">Alimentos</td>
 
                 <td data-label="Estoque">
-                  <strong class="stock-number">20 un.</strong>
+                  <strong class="stock-number">16 un.</strong>
                 </td>
 
                 <td data-label="Preço">
@@ -948,24 +1267,44 @@
                 </td>
 
                 <td>
-                  <button
-                    class="product-menu-button"
-                    type="button"
-                    aria-label="Abrir opções do Óleo de soja"
-                  >
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <circle cx="5" cy="12" r="1"/>
-                      <circle cx="12" cy="12" r="1"/>
-                      <circle cx="19" cy="12" r="1"/>
-                    </svg>
-                  </button>
+                  <div class="product-actions">
+                    <button
+                      class="product-menu-button"
+                      type="button"
+                      aria-label="Abrir opções do Óleo de soja Liza 900 ml"
+                      aria-controls="product-menu-10"
+                      aria-expanded="false"
+                    >
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="5" cy="12" r="1"/>
+                        <circle cx="12" cy="12" r="1"/>
+                        <circle cx="19" cy="12" r="1"/>
+                      </svg>
+                    </button>
+
+                    <div class="product-actions-menu" id="product-menu-10" hidden>
+                      <button type="button" data-product-action="view" data-product-id="10">
+                        Visualizar
+                      </button>
+
+                      <a href="./cadastro-produto.html?id=10">Editar</a>
+
+                      <button type="button" data-product-action="stock" data-product-id="10">
+                        Ajustar estoque
+                      </button>
+
+                      <button class="danger-action" type="button" data-product-action="delete" data-product-id="10">
+                        Excluir
+                      </button>
+                    </div>
+                  </div>
                 </td>
               </tr>
 
               <!-- NENHUM RESULTADO -->
               <tr
-                id="empty-products-row"
                 class="empty-products-row"
+                id="empty-products-row"
                 hidden
               >
                 <td colspan="6">
@@ -976,7 +1315,9 @@
                       <path d="m20 20-4-4M8.5 11h5"/>
                     </svg>
 
-                    <strong>Nenhum produto encontrado</strong>
+                    <strong>
+                      Nenhum produto encontrado
+                    </strong>
 
                     <span>
                       Tente alterar a pesquisa ou os filtros.
@@ -988,7 +1329,6 @@
                     >
                       Limpar filtros
                     </button>
-
                   </div>
                 </td>
               </tr>
@@ -997,22 +1337,21 @@
           </table>
         </div>
 
-        <!-- RODAPÉ -->
+        <!-- RODAPÉ E PAGINAÇÃO -->
         <footer class="products-panel-footer">
 
           <p id="products-counter">
-            Mostrando <strong>6</strong> de
+            Mostrando <strong>1–6</strong> de
             <strong>10</strong> produtos
           </p>
 
           <nav
-            id="products-pagination"
             class="pagination"
+            id="products-pagination"
             aria-label="Paginação dos produtos"
           ></nav>
 
         </footer>
-
       </section>
     </section>
   </main>
