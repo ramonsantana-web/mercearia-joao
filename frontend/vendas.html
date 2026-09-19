@@ -1021,6 +1021,121 @@
                 </td>
               </tr>
 
+              <!-- ==================================================
+                   VENDA 6 — PENDENTE E VENCIDA
+                   Cobrança exibida no painel de atenção do Dashboard
+                   ================================================== -->
+
+              <tr
+                class="sale-row"
+                data-sale-id="venda-006"
+                data-customer="Ana Costa"
+                data-status="pending"
+                data-value="150"
+              >
+                <th scope="row">
+                  <div class="sale-customer">
+                    <span
+                      class="sale-customer-avatar avatar-red"
+                      aria-hidden="true"
+                    >
+                      AC
+                    </span>
+
+                    <div>
+                      <strong>Ana Costa</strong>
+                      <small>Venda #006</small>
+                    </div>
+                  </div>
+                </th>
+
+                <td data-label="Valor">
+                  <strong class="sale-value">
+                    R$ 150,00
+                  </strong>
+                </td>
+
+                <td data-label="Data da venda">
+                  <time datetime="2026-08-28">
+                    28 ago 2026
+                  </time>
+                </td>
+
+                <td
+                  class="sale-payment-date"
+                  data-label="Pagamento"
+                >
+                  Venceu em 02 set 2026
+                </td>
+
+                <td data-label="Situação">
+                  <span class="sale-status is-pending">
+                    <i aria-hidden="true"></i>
+                    Pendente
+                  </span>
+                </td>
+
+                <td data-label="Ações">
+                  <div class="sale-actions">
+                    <button
+                      class="view-sale-button"
+                      type="button"
+                      aria-label="Ver detalhes da cobrança vencida de Ana Costa"
+                      aria-expanded="false"
+                      aria-controls="details-venda-006"
+                    >
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6S2.5 12 2.5 12Z"/>
+                        <circle cx="12" cy="12" r="2.5"/>
+                      </svg>
+
+                      <span>Ver</span>
+                    </button>
+
+                    <button
+                      class="mark-paid-button"
+                      type="button"
+                      aria-label="Marcar a cobrança de Ana Costa como paga"
+                      title="Marcar como paga"
+                    >
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="m5 12 4 4L19 6"/>
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr
+                class="sale-details-row"
+                id="details-venda-006"
+                hidden
+              >
+                <td colspan="6">
+                  <div class="sale-details">
+                    <div>
+                      <span>Produtos</span>
+                      <strong>Produtos variados</strong>
+                    </div>
+
+                    <div>
+                      <span>Quantidade</span>
+                      <strong>6 unidades</strong>
+                    </div>
+
+                    <div>
+                      <span>Forma de pagamento</span>
+                      <strong>Fiado</strong>
+                    </div>
+
+                    <div>
+                      <span>Total</span>
+                      <strong>R$ 150,00</strong>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
               <!-- NENHUMA VENDA ENCONTRADA -->
 
               <tr
