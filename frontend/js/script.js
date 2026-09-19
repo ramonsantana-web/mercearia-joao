@@ -397,6 +397,102 @@
           }
         }
       }
+
+      /* Abre uma cobrança específica quando a página recebe
+         parâmetros como: vendas.html?filtro=pending&venda=venda-006 */
+      function openRequestedSale() {
+        const parameters = new URLSearchParams(
+          window.location.search
+        );
+
+        const requestedSaleId = parameters.get("venda");
+        let requestedFilter = parameters.get("filtro");
+
+        if (!requestedSaleId) {
+          return;
+        }
+
+        const requestedRow = saleRows.find(
+          function (row) {
+            return row.dataset.saleId === requestedSaleId;
+          }
+        );
+
+        if (!requestedRow) {
+          return;
+        }
+
+        if (searchInput) {
+          searchInput.value = "";
+        }
+
+        if (
+          requestedFilter !== "all" &&
+          requestedFilter !== "paid" &&
+          requestedFilter !== "pending"
+        ) {
+          requestedFilter = requestedRow.dataset.status;
+        }
+
+        /* Se a cobrança já tiver sido paga, abre em Pagas
+           mesmo que o link antigo ainda informe Pendentes. */
+        if (
+          requestedFilter !== "all" &&
+          requestedFilter !== requestedRow.dataset.status
+        ) {
+          requestedFilter = requestedRow.dataset.status;
+        }
+
+        selectSalesFilter(
+          requestedFilter || requestedRow.dataset.status
+        );
+
+        const details = document.querySelector(
+          "#details-" + requestedSaleId
+        );
+
+        const viewButton = requestedRow.querySelector(
+          ".view-sale-button"
+        );
+
+        viewButtons.forEach(function (button) {
+          const detailsId = button.getAttribute("aria-controls");
+          const otherDetails = document.getElementById(detailsId);
+
+          button.setAttribute("aria-expanded", "false");
+
+          if (otherDetails) {
+            otherDetails.hidden = true;
+          }
+        });
+
+        if (details) {
+          details.hidden = false;
+        }
+
+        if (viewButton) {
+          viewButton.setAttribute("aria-expanded", "true");
+        }
+
+        requestedRow.classList.add("is-targeted-sale");
+
+        window.requestAnimationFrame(function () {
+          requestedRow.scrollIntoView({
+            behavior: window.matchMedia(
+              "(prefers-reduced-motion: reduce)"
+            ).matches ? "auto" : "smooth",
+            block: "center"
+          });
+
+          if (viewButton) {
+            viewButton.focus({ preventScroll: true });
+          }
+        });
+
+        window.setTimeout(function () {
+          requestedRow.classList.remove("is-targeted-sale");
+        }, 3200);
+      }
     
       viewButtons.forEach(function (button) {
         button.addEventListener(
@@ -539,6 +635,7 @@
     
       updateSummary();
       renderSales();
+      openRequestedSale();
     })();
   
   
@@ -1039,14 +1136,14 @@
             '<td data-label="Preço"><strong class="product-price">' + formatCurrency(product.price) + '</strong></td>' +
             '<td data-label="Situação"><span class="product-status ' + statusData.className + '"><i aria-hidden="true"></i>' + statusData.label + '</span></td>' +
             '<td><div class="product-actions">' +
-              '<button class="product-menu-button" type="button" aria-label="Abrir opções do ' + productName + '" aria-controls="product-menu-' + productId + '" aria-expanded="false">' +
-                '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg>' +
+              '<button class="product-menu-button" type="button" aria-label="Abrir ações de ' + productName + '" data-open-label="Abrir ações de ' + productName + '" aria-controls="product-menu-' + productId + '" aria-expanded="false">' +
+                '<i class="ri-add-line" aria-hidden="true"></i>' +
               '</button>' +
-              '<div class="product-actions-menu" id="product-menu-' + productId + '" hidden>' +
-                '<button type="button" data-product-action="view" data-product-id="' + productId + '">Visualizar</button>' +
-                '<a href="./cadastro-produto.html?id=' + encodeURIComponent(product.id) + '">Editar</a>' +
-                '<button type="button" data-product-action="stock" data-product-id="' + productId + '">Ajustar estoque</button>' +
-                '<button class="danger-action" type="button" data-product-action="delete" data-product-id="' + productId + '">Excluir</button>' +
+              '<div class="product-actions-menu" id="product-menu-' + productId + '" aria-label="Ações de ' + productName + '" hidden>' +
+                '<button class="product-action-view" type="button" data-product-action="view" data-product-id="' + productId + '" aria-label="Visualizar ' + productName + '" title="Visualizar"><i class="ri-eye-line" aria-hidden="true"></i></button>' +
+                '<a class="product-action-edit" href="./cadastro-produto.html?id=' + encodeURIComponent(product.id) + '" aria-label="Editar ' + productName + '" title="Editar"><i class="ri-pencil-line" aria-hidden="true"></i></a>' +
+                '<button class="product-action-stock" type="button" data-product-action="stock" data-product-id="' + productId + '" aria-label="Ajustar estoque de ' + productName + '" title="Ajustar estoque"><i class="ri-inbox-2-line" aria-hidden="true"></i></button>' +
+                '<button class="product-action-delete" type="button" data-product-action="delete" data-product-id="' + productId + '" aria-label="Excluir ' + productName + '" title="Excluir"><i class="ri-delete-bin-line" aria-hidden="true"></i></button>' +
               '</div>' +
             '</div></td>' +
           '</tr>'
@@ -1084,14 +1181,37 @@
         if (inventoryElement) inventoryElement.textContent = formatCurrency(inventoryValue);
       }
     
-      function closeProductMenus(exceptionMenu) {
+      function closeProductMenu(menu, menuButton) {
+        if (!menu || !menuButton) return;
+
+        window.clearTimeout(menu.closeTimer);
+        menu.classList.remove("is-open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.setAttribute(
+          "aria-label",
+          menuButton.dataset.openLabel || "Abrir ações do produto"
+        );
+
+        menu.closeTimer = window.setTimeout(function () {
+          if (!menu.classList.contains("is-open")) menu.hidden = true;
+        }, 170);
+      }
+
+      function closeProductMenus(exceptionButton) {
         document.querySelectorAll(".product-actions-menu").forEach(function (menu) {
-          if (menu !== exceptionMenu) menu.hidden = true;
+          const menuButton = menu.previousElementSibling;
+          if (menuButton !== exceptionButton) closeProductMenu(menu, menuButton);
         });
-    
-        document.querySelectorAll(".product-menu-button").forEach(function (button) {
-          const controlledMenu = document.getElementById(button.getAttribute("aria-controls"));
-          button.setAttribute("aria-expanded", String(controlledMenu && !controlledMenu.hidden));
+      }
+
+      function openProductMenu(menu, menuButton) {
+        window.clearTimeout(menu.closeTimer);
+        menu.hidden = false;
+        menuButton.setAttribute("aria-expanded", "true");
+        menuButton.setAttribute("aria-label", "Fechar ações do produto");
+
+        window.requestAnimationFrame(function () {
+          menu.classList.add("is-open");
         });
       }
     
@@ -1125,11 +1245,16 @@
           if (menuButton) {
             const menu = document.getElementById(menuButton.getAttribute("aria-controls"));
             if (!menu) return;
-    
-            const willOpen = menu.hidden;
-            closeProductMenus(menu);
-            menu.hidden = !willOpen;
-            menuButton.setAttribute("aria-expanded", String(willOpen));
+
+            const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+            closeProductMenus(menuButton);
+
+            if (isOpen) {
+              closeProductMenu(menu, menuButton);
+            } else {
+              openProductMenu(menu, menuButton);
+            }
+
             return;
           }
     
@@ -1137,6 +1262,8 @@
     
           const actionButton = event.target.closest("[data-product-action]");
           if (!actionButton) return;
+
+          closeProductMenus();
     
           const productId = actionButton.dataset.productId;
           const products = getProducts();
@@ -2877,16 +3004,41 @@
         });
     }
   
+    function closeClientActionMenu(menu, menuButton) {
+      if (!menu || !menuButton) {
+        return;
+      }
+
+      window.clearTimeout(menu.closeTimer);
+      menu.classList.remove("is-open");
+      menuButton.setAttribute("aria-expanded", "false");
+      menuButton.setAttribute("aria-label", menuButton.dataset.openLabel || "Abrir ações do cliente");
+
+      menu.closeTimer = window.setTimeout(function () {
+        if (!menu.classList.contains("is-open")) {
+          menu.hidden = true;
+        }
+      }, 170);
+    }
+
     function closeActionMenus(exceptionButton) {
       document.querySelectorAll(".client-actions-menu").forEach(function (menu) {
         const menuButton = menu.previousElementSibling;
   
         if (menuButton !== exceptionButton) {
-          menu.hidden = true;
-          if (menuButton) {
-            menuButton.setAttribute("aria-expanded", "false");
-          }
+          closeClientActionMenu(menu, menuButton);
         }
+      });
+    }
+
+    function openClientActionMenu(menu, menuButton) {
+      window.clearTimeout(menu.closeTimer);
+      menu.hidden = false;
+      menuButton.setAttribute("aria-expanded", "true");
+      menuButton.setAttribute("aria-label", "Fechar ações do cliente");
+
+      window.requestAnimationFrame(function () {
+        menu.classList.add("is-open");
       });
     }
   
@@ -2908,13 +3060,13 @@
         '<td><span class="client-phone">' + escapeHTML(phone) + "</span></td>" +
         '<td><span class="client-address" title="' + escapeHTML(address) + '">' + escapeHTML(address) + "</span></td>" +
         '<td><div class="client-actions">' +
-          '<button class="client-menu-button" type="button" aria-label="Abrir ações de ' + escapeHTML(client.name) + '" aria-expanded="false">' +
-            '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>' +
+          '<button class="client-menu-button" type="button" aria-label="Abrir ações de ' + escapeHTML(client.name) + '" data-open-label="Abrir ações de ' + escapeHTML(client.name) + '" aria-expanded="false">' +
+            '<i class="ri-add-line" aria-hidden="true"></i>' +
           "</button>" +
-          '<div class="client-actions-menu" hidden>' +
-            '<button type="button" data-client-action="view" data-client-id="' + safeId + '">Visualizar</button>' +
-            '<button type="button" data-client-action="edit" data-client-id="' + safeId + '">Editar</button>' +
-            '<button class="danger-action" type="button" data-client-action="delete" data-client-id="' + safeId + '">Excluir</button>' +
+          '<div class="client-actions-menu" aria-label="Ações de ' + escapeHTML(client.name) + '" hidden>' +
+            '<button class="client-action-view" type="button" data-client-action="view" data-client-id="' + safeId + '" aria-label="Visualizar ' + escapeHTML(client.name) + '" title="Visualizar"><i class="ri-eye-line" aria-hidden="true"></i></button>' +
+            '<button class="client-action-edit" type="button" data-client-action="edit" data-client-id="' + safeId + '" aria-label="Editar ' + escapeHTML(client.name) + '" title="Editar"><i class="ri-pencil-line" aria-hidden="true"></i></button>' +
+            '<button class="client-action-delete" type="button" data-client-action="delete" data-client-id="' + safeId + '" aria-label="Excluir ' + escapeHTML(client.name) + '" title="Excluir"><i class="ri-delete-bin-line" aria-hidden="true"></i></button>' +
           "</div>" +
         "</div></td>";
   
@@ -3248,8 +3400,13 @@
         const menu = menuButton.nextElementSibling;
         const isOpen = menuButton.getAttribute("aria-expanded") === "true";
         closeActionMenus(menuButton);
-        menuButton.setAttribute("aria-expanded", String(!isOpen));
-        menu.hidden = isOpen;
+
+        if (isOpen) {
+          closeClientActionMenu(menu, menuButton);
+        } else {
+          openClientActionMenu(menu, menuButton);
+        }
+
         return;
       }
   
